@@ -42,5 +42,24 @@ public class Tracker {
         return temp;
     }
 
+    private int indexOfId(int id) {
+        int index = -1;
+        for (int i = 0; i < this.size; i++) {
+            if (this.items[i].getId() == id) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
 
+    public boolean replace(int id, Item request) {
+        boolean result = false;
+        int exp = indexOfId(id);
+        if (exp != -1) {
+            this.items[exp].setName(request.getName());
+            result = true;
+        }
+        return result;
+    }
 }
