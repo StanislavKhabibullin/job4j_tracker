@@ -36,8 +36,7 @@ public class Tracker {
                 temp[rex++] = items[i];
             }
         }
-        temp = Arrays.copyOf(temp, rex);
-        return temp;
+        return Arrays.copyOf(temp, rex);
     }
 
     private int indexOfId(int id) {
