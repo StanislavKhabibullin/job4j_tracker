@@ -65,6 +65,7 @@ public class Tracker {
         int index = indexOfId(id);
         System.arraycopy(this.items, index + 1, this.items, index, size - index);
         this.items[size] = null;
+        size--;
         return true;
     }
 }
