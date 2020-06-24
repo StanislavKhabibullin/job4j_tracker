@@ -60,4 +60,11 @@ public class Tracker {
         }
         return result;
     }
+
+    public boolean delete(int id) {
+        int index = indexOfId(id);
+        System.arraycopy(this.items, index + 1, this.items, index, size - index);
+        this.items[size] = null;
+        return true;
+    }
 }

@@ -9,9 +9,12 @@ public class Item {
         this.name = name;
     }
 
+    public Item(String name) {
+          this.name = name;
+    }
+
     public Item() {
-        this.id = 999;
-        this.name = "No subject";
+
     }
 
     public int getId() {
