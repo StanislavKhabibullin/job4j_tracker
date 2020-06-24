@@ -54,7 +54,8 @@ public class Tracker {
         boolean result = false;
         int exp = indexOfId(id);
         if (exp != -1) {
-            this.items[exp].setName(request.getName());
+            this.items[exp] = request;
+            this.items[exp].setId(id);
             result = true;
         }
         return result;
