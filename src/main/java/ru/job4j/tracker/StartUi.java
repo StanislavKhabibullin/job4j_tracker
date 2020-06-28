@@ -23,17 +23,14 @@ public class StartUi {
             }
             else if (select == 2) {
                 System.out.println("Input id elements you want to edit: ");
-                Scanner scan = new Scanner(System.in);
-                int promt = Integer.valueOf(scan.nextLine());
-                if (tracker.findById(promt) != null) {
+                int promt = Integer.valueOf(scanner.nextLine());
                     Item zamena = new Item();
                     System.out.println("Input the new request");
                     String inp = new String();
-                    Scanner request = new Scanner(System.in);
-                    inp = request.nextLine();
+                    inp = scanner.nextLine();
                     zamena.setName(inp);
                     zamena.setId(promt);
-                    tracker.replace(zamena.getId(), zamena);
+                    if (tracker.replace(zamena.getId(), zamena)) {
                     System.out.println("Replace succes");
                 } else {
                     System.out.println("Error no such id");
@@ -41,10 +38,8 @@ public class StartUi {
             }
             else if (select == 3) {
                 System.out.println("Input id elements you want to delete: ");
-                Scanner scan = new Scanner(System.in);
-                int promt = Integer.valueOf(scan.nextLine());
-                if (tracker.findById(promt) != null) {
-                    tracker.delete(promt);
+                int promt = Integer.valueOf(scanner.nextLine());
+                if (tracker.delete(promt)) {
                     System.out.println("Delete succes");
                 } else {
                     System.out.println("Error no such id");
@@ -52,23 +47,29 @@ public class StartUi {
             }
             else if (select == 4) {
                 System.out.println("Input id elements you want to find: ");
-                Scanner scan = new Scanner(System.in);
-                int promt = Integer.valueOf(scan.nextLine());
+                int promt = Integer.valueOf(scanner.nextLine());
                 Item temp = new Item();
                 temp = tracker.findById(promt);
-                System.out.println("id: " + temp.getId() +
-                        " name: " + temp.getName());
+                if (temp != null) {
+                    System.out.println("id: " + temp.getId() +
+                            " name: " + temp.getName());
+                } else {
+                    System.out.println("No such id");
+                }
             }
             else if (select == 5) {
                 System.out.println("Input the name of request you want to find");
                 String inp = new String();
-                Scanner request = new Scanner(System.in);
-                inp = request.nextLine();
+                inp = scanner.nextLine();
                 Item[] temp = new Item[tracker.findByName(inp).length];
                 temp = tracker.findByName(inp);
-                for (int i = 0; i < temp.length; i++) {
-                    System.out.println("id: " + temp[i].getId() +
-                            " name: " + temp[i].getName());
+                if (temp.length > 0) {
+                    for (int i = 0; i < temp.length; i++) {
+                        System.out.println("id: " + temp[i].getId() +
+                                " name: " + temp[i].getName());
+                    }
+                } else {
+                    System.out.println("No such requests");
                 }
             }
             else if (select == 6) {
