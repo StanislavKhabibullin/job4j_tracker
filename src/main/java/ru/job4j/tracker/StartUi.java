@@ -14,8 +14,7 @@ public class StartUi {
                 Item next = new Item(inp);
                 tracker.add(next);
             } else if (select == 1) {
-                Item[] mas = new Item[tracker.findAll().length];
-                mas = tracker.findAll();
+                Item[] mas = tracker.findAll();
                 for (int i = 0; i < mas.length; i++) {
                     System.out.println("id: " + mas[i].getId() +
                             " name: " + mas[i].getName());
@@ -26,11 +25,10 @@ public class StartUi {
                 int promt = Integer.valueOf(scanner.nextLine());
                     Item zamena = new Item();
                     System.out.println("Input the new request");
-                    String inp = new String();
-                    inp = scanner.nextLine();
+                    String inp = scanner.nextLine();
                     zamena.setName(inp);
                     zamena.setId(promt);
-                    if (tracker.replace(zamena.getId(), zamena)) {
+                    if (tracker.replace(promt, zamena)) {
                     System.out.println("Replace succes");
                 } else {
                     System.out.println("Error no such id");
@@ -48,8 +46,7 @@ public class StartUi {
             else if (select == 4) {
                 System.out.println("Input id elements you want to find: ");
                 int promt = Integer.valueOf(scanner.nextLine());
-                Item temp = new Item();
-                temp = tracker.findById(promt);
+                Item temp = tracker.findById(promt);
                 if (temp != null) {
                     System.out.println("id: " + temp.getId() +
                             " name: " + temp.getName());
@@ -59,10 +56,8 @@ public class StartUi {
             }
             else if (select == 5) {
                 System.out.println("Input the name of request you want to find");
-                String inp = new String();
-                inp = scanner.nextLine();
-                Item[] temp = new Item[tracker.findByName(inp).length];
-                temp = tracker.findByName(inp);
+                String inp = scanner.nextLine();
+                Item[] temp = tracker.findByName(inp);
                 if (temp.length > 0) {
                     for (int i = 0; i < temp.length; i++) {
                         System.out.println("id: " + temp[i].getId() +
