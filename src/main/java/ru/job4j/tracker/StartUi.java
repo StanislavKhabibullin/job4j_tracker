@@ -23,11 +23,9 @@ public class StartUi {
             else if (select == 2) {
                 System.out.println("Input id elements you want to edit: ");
                 int promt = Integer.valueOf(scanner.nextLine());
-                    Item zamena = new Item();
                     System.out.println("Input the new request");
                     String inp = scanner.nextLine();
-                    zamena.setName(inp);
-                    zamena.setId(promt);
+                Item zamena = new Item(inp);
                     if (tracker.replace(promt, zamena)) {
                     System.out.println("Replace succes");
                 } else {
