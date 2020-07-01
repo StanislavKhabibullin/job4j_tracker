@@ -1,16 +1,15 @@
 package ru.job4j.tracker;
 
-import java.util.Scanner;
 
 public class StartUi {
-    public void init(Scanner scanner, Tracker tracker) {
+
+    public void init(Input input, Tracker tracker) {
         boolean run = true;
         while (run) {
             this.showMenu();
-            int select = Integer.valueOf(scanner.nextLine());
+            int select = input.askInt("INPUT YOUR CHOICE");
             if (select == 0) {
-                System.out.println("Input request");
-                String inp = scanner.nextLine();
+                String inp = input.askStr("Input request");
                 Item next = new Item(inp);
                 tracker.add(next);
             } else if (select == 1) {
@@ -21,10 +20,8 @@ public class StartUi {
                 }
             }
             else if (select == 2) {
-                System.out.println("Input id elements you want to edit: ");
-                int promt = Integer.valueOf(scanner.nextLine());
-                    System.out.println("Input the new request");
-                    String inp = scanner.nextLine();
+                int promt = input.askInt("Input id elements you want to edit: ");
+                    String inp = input.askStr("Input the new request");
                 Item zamena = new Item(inp);
                     if (tracker.replace(promt, zamena)) {
                     System.out.println("Replace succes");
@@ -33,8 +30,7 @@ public class StartUi {
                 }
             }
             else if (select == 3) {
-                System.out.println("Input id elements you want to delete: ");
-                int promt = Integer.valueOf(scanner.nextLine());
+                int promt = input.askInt("Input id elements you want to delete: ");
                 if (tracker.delete(promt)) {
                     System.out.println("Delete succes");
                 } else {
@@ -42,8 +38,7 @@ public class StartUi {
                 }
             }
             else if (select == 4) {
-                System.out.println("Input id elements you want to find: ");
-                int promt = Integer.valueOf(scanner.nextLine());
+                int promt = input.askInt("Input id elements you want to find: ");
                 Item temp = tracker.findById(promt);
                 if (temp != null) {
                     System.out.println("id: " + temp.getId() +
@@ -53,8 +48,7 @@ public class StartUi {
                 }
             }
             else if (select == 5) {
-                System.out.println("Input the name of request you want to find");
-                String inp = scanner.nextLine();
+                String inp = input.askStr("Input the name of request you want to find");
                 Item[] temp = tracker.findByName(inp);
                 if (temp.length > 0) {
                     for (int i = 0; i < temp.length; i++) {
@@ -89,9 +83,9 @@ public class StartUi {
 
 
     public static void main(String[] args) {
-       Scanner scanner = new Scanner(System.in);
+       Input input = new ConsoleInput();
        Tracker temp = new Tracker();
-       new StartUi().init(scanner, temp);
+       new StartUi().init(input, temp);
 
     }
 }
