@@ -19,30 +19,31 @@ public class TrackerTest {
     @Test
     public void whenReplace() {
         Tracker test = new Tracker();
-        Item bug = new Item();
-        bug.setName("Bug");
+        Item bug = new Item("New Item");
         test.add(bug);
-        int id = bug.getId();
-        Item budWithDesk = new Item();
-        budWithDesk.setName("Bug with description");
-        test.replace(id, budWithDesk);
+        String[] answers = {
+                String.valueOf(bug.getId()), "Replaced Item"
+        };
+        StartUi.editItem(new StubInput(answers), test);
+        Item expected = test.findById(bug.getId());
         assertThat(
-                test.findById(id).getName(),
-                is("Bug with description")
+                expected.getName(),
+                is("Replaced Item")
         );
     }
 
     @Test
     public void whenDelete() {
         Tracker tracker = new Tracker();
-        Item bug = new Item();
-        bug.setName("Bug");
+        Item bug = new Item("New Item");
         tracker.add(bug);
-        int id = bug.getId();
-        tracker.delete(id);
-        bug = tracker.findById(id);
-        assertThat(bug,
-                is((nullValue()))
+        String[] answers = {
+                String.valueOf(bug.getId())
+        };
+        StartUi.deleteItem(new StubInput(answers), tracker);
+        Item expected = null;
+        assertThat(tracker.findById(bug.getId()),
+                is(expected)
                 );
     }
 }
