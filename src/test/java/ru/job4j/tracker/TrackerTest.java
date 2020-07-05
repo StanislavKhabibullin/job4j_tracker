@@ -21,14 +21,12 @@ public class TrackerTest {
         Tracker test = new Tracker();
         Item bug = new Item("New Item");
         test.add(bug);
-        String[] answers = {
-                String.valueOf(bug.getId()), "Replaced Item"
-        };
-        StartUi.editItem(new StubInput(answers), test);
-        Item expected = test.findById(bug.getId());
+        Item expected = new Item("Replace Item");
+        test.replace(bug.getId(),expected);
+        Item result = test.findById(bug.getId());
         assertThat(
-                expected.getName(),
-                is("Replaced Item")
+                result.getName(),
+                is("Replace Item")
         );
     }
 
