@@ -64,12 +64,14 @@ public class StartUi {
         System.out.println("See you soon!");
     }
 
-    public void init(Input input, Tracker tracker) {
+    public void init(Input input, Tracker tracker, UserAction[] actions) {
         boolean run = true;
         while (run) {
-            this.showMenu();
+            this.showMenu(actions);
             int select = input.askInt("INPUT YOUR CHOICE");
-            if (select == 0) {
+            UserAction action = actions[select];
+            run = action.execute(input, tracker);
+           /* if (select == 0) {
                 StartUi.createItem(input, tracker);
             } else if (select == 1) {
                 StartUi.showItems(tracker);
@@ -89,22 +91,17 @@ public class StartUi {
             else if (select == 6) {
                 StartUi.byBy();
                 run = false;
-            }
+            } */
 
         }
 
     }
 
-    private void showMenu() {
-        System.out.println("Menu." +
-                System.lineSeparator() + "0. Add new Item" +
-                System.lineSeparator() + "1. Show all items" +
-                System.lineSeparator() + "2. Edit item" +
-                System.lineSeparator() + "3. Delete item" +
-                System.lineSeparator() + "4. Find item by Id" +
-                System.lineSeparator() + "5. Find items by name" +
-                System.lineSeparator() + "6. Exit Program" +
-                System.lineSeparator() + "Select:");
+    private void showMenu(UserAction[] actions) {
+        System.out.println("Menu.");
+        for (int i = 0; i < actions.length; i++) {
+            System.out.println(i + " ." + actions[i].name());
+        }
     }
 
 
@@ -112,7 +109,16 @@ public class StartUi {
     public static void main(String[] args) {
        Input input = new ConsoleInput();
        Tracker temp = new Tracker();
-       new StartUi().init(input, temp);
+       UserAction[] actions = {
+               new CreateAction(),
+               new ShowItems(),
+               new ReplaceAction(),
+               new DeleteItem(),
+               new FindByName(),
+               new FindByItem(),
+               new ByBy()
+       };
+       new StartUi().init(input, temp, actions);
 
     }
 }
