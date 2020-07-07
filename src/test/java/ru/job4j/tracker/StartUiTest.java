@@ -6,7 +6,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import junit.framework.TestCase;
 
-public class StartUiTest extends TestCase {
+public class StartUiTest /*extends TestCase */{
 
     public void testCreateItem() {
         String[] answers = {"Fix PC"};
@@ -56,4 +56,59 @@ public class StartUiTest extends TestCase {
 
     public void testByBy() {
     }
+
+    @Test
+    public void testInit() {
+        Input in = new StubInput(
+                new String[] {"0", "Item Name", "1" }
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new CreateAction(),
+                new ByBy()
+        };
+        new StartUi().init(in, tracker, actions);
+        assertThat(tracker.findAll()[0].getName(),
+                is("Item Name"));
+    }
+
+    @Test
+    public void whenReplaceItem() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("Replaced item");
+        tracker.add(item);
+        int index = item.getId();
+        Item replaced = new Item("New item name");
+        Input in = new StubInput(
+                new String[] {"0", Integer.toString(index), replaced.getName(), "1"}
+        );
+        UserAction[] actions = {
+                new ReplaceAction(),
+                new ByBy()
+        };
+        new StartUi().init(in, tracker, actions);
+        assertThat(tracker.findById(index).getName(), is(replaced.getName()));
+    }
+
+    @Test
+    public void whenDeleteItem() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("Replaced item");
+        tracker.add(item);
+        int index = item.getId();
+        Item replaced = new Item("New item name");
+        tracker.add(replaced);
+        Item rsl = null;
+        Input in = new StubInput(
+                new String[] {"1", "0", Integer.toString(index), "1", "2"}
+        );
+        UserAction[] actions = {
+                new DeleteItem(),
+                new ShowItems(),
+                new ByBy()
+        };
+        new StartUi().init(in, tracker, actions);
+        assertThat(tracker.findById(index), is(rsl));
+    }
+
 }
