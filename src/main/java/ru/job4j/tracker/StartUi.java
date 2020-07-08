@@ -119,11 +119,11 @@ public class StartUi {
        Tracker temp = new Tracker();
        UserAction[] actions = {
                new CreateAction(output),
-               new ShowItems(),
+               new ShowItems(output),
                new ReplaceAction(),
                new DeleteItem(),
-               new FindByName(),
-               new FindByItem(),
+               new FindByName(output),
+               new FindByItem(output),
                new ByBy()
        };
        new StartUi(output).init(input, temp, actions);

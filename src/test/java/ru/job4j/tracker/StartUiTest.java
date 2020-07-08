@@ -18,7 +18,30 @@ public class StartUiTest /*extends TestCase */{
         assertThat(created.getName(), is(expected.getName()));
     }
 
+    @Test
     public void testShowItems() {
+        Output output = new StubOutPut();
+        Tracker tracker = new Tracker();
+        Item item = new Item("Replaced item");
+        tracker.add(item);
+        Item replaced = new Item("New item name");
+        tracker.add(replaced);
+        Input in = new StubInput(
+                new String[] {"0", "1"}
+        );
+        UserAction[] actions = {
+                new ShowItems(output),
+                new ByBy()
+        };
+        new StartUi(output).init(in, tracker, actions);
+        assertThat(output.toString(), is("Menu." + System.lineSeparator() +
+                "0 .Show all Items" + System.lineSeparator() +
+                "1 .Exit" + System.lineSeparator() +
+                "id: 1 name: Replaced item" + System.lineSeparator() +
+                "id: 2 name: New item name" + System.lineSeparator() +
+                "Menu." + System.lineSeparator() +
+                "0 .Show all Items" + System.lineSeparator() +
+                "1 .Exit" + System.lineSeparator()));
     }
 
     public void testEditItem() {
@@ -48,10 +71,54 @@ public class StartUiTest /*extends TestCase */{
             );
     }
 
+    @Test
     public void testFindByItem() {
+        Output output = new StubOutPut();
+        Tracker tracker = new Tracker();
+        Item item = new Item("Replaced item");
+        tracker.add(item);
+        Item replaced = new Item("New item name");
+        tracker.add(replaced);
+        Input in = new StubInput(
+                new String[] {"0", "1", "1"}
+        );
+        UserAction[] actions = {
+                new FindByItem(output),
+                new ByBy()
+        };
+        new StartUi(output).init(in, tracker, actions);
+        assertThat(output.toString(), is("Menu." + System.lineSeparator() +
+                "0 .Find By Id" + System.lineSeparator() +
+                "1 .Exit" + System.lineSeparator() +
+                "id: 1 name: Replaced item" + System.lineSeparator() +
+                "Menu." + System.lineSeparator() +
+                "0 .Find By Id" + System.lineSeparator() +
+                "1 .Exit" + System.lineSeparator()));
     }
 
+    @Test
     public void testFindByName() {
+        Output output = new StubOutPut();
+        Tracker tracker = new Tracker();
+        Item item = new Item("Replaced item");
+        tracker.add(item);
+        Item replaced = new Item("New item name");
+        tracker.add(replaced);
+        Input in = new StubInput(
+                new String[] {"0", "1", "1"}
+        );
+        UserAction[] actions = {
+                new FindByName(output),
+                new ByBy()
+        };
+        new StartUi(output).init(in, tracker, actions);
+        assertThat(output.toString(), is("Menu." + System.lineSeparator() +
+                "0 .Find By Name" + System.lineSeparator() +
+                "1 .Exit" + System.lineSeparator() +
+                "No such requests" + System.lineSeparator() +
+                "Menu." + System.lineSeparator() +
+                "0 .Find By Name" + System.lineSeparator() +
+                "1 .Exit" + System.lineSeparator()));
     }
 
     public void testByBy() {
@@ -107,7 +174,7 @@ public class StartUiTest /*extends TestCase */{
         );
         UserAction[] actions = {
                 new DeleteItem(),
-                new ShowItems(),
+                new ShowItems(output),
                 new ByBy()
         };
         new StartUi(output).init(in, tracker, actions);
