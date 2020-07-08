@@ -1,6 +1,12 @@
 package ru.job4j.tracker;
 
 public class ReplaceAction implements UserAction {
+    private final Output out;
+
+    public ReplaceAction(Output out) {
+        this.out = out;
+    }
+
     @Override
     public String name() {
         return "Replase action";
@@ -12,9 +18,9 @@ public class ReplaceAction implements UserAction {
         String inp = input.askStr("Input the new request");
         Item zamena = new Item(inp);
         if (tracker.replace(promt, zamena)) {
-            System.out.println("Replace succes");
+            out.println("Replace succes");
         } else {
-            System.out.println("Error no such id");
+            out.println("Error no such id");
         }
         return true;
     }

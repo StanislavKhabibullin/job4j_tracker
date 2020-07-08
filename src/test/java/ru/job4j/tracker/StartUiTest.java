@@ -43,32 +43,53 @@ public class StartUiTest /*extends TestCase */{
                 "0 .Show all Items" + System.lineSeparator() +
                 "1 .Exit" + System.lineSeparator()));
     }
-
+    @Test
     public void testEditItem() {
+        Output output = new StubOutPut();
         Tracker tracker = new Tracker();
-        Item first = new Item("first");
-        tracker.add(first);
-        String[] answers = {String.valueOf(first.getId()), "second"};
-        Input input = new StubInput(answers);
-
-        StartUi.editItem(input, tracker);
-        Item rezult = tracker.findById(first.getId());
-        Item expected = new Item("second");
-        assertThat(rezult.getName(), is(expected.getName()));
+        Item item = new Item("Replaced item");
+        tracker.add(item);
+        Item replaced = new Item("New item name");
+        tracker.add(replaced);
+        Input in = new StubInput(
+                new String[] {"0", "1", replaced.getName(), "1"}
+        );
+        UserAction[] actions = {
+                new ReplaceAction(output),
+                new ByBy()
+        };
+        new StartUi(output).init(in, tracker, actions);
+        assertThat(output.toString(), is("Menu." + System.lineSeparator() +
+                "0 .Replase action" + System.lineSeparator() +
+                "1 .Exit" + System.lineSeparator() +
+                "Replace succes" + System.lineSeparator() +
+                "Menu." + System.lineSeparator() +
+                "0 .Replase action" + System.lineSeparator() +
+                "1 .Exit" + System.lineSeparator()));
     }
-
+    @Test
     public void testDeleteItem() {
-            Tracker tracker = new Tracker();
-            Item bug = new Item("New Item");
-            tracker.add(bug);
-            String[] answers = {
-                    String.valueOf(bug.getId())
-            };
-            StartUi.deleteItem(new StubInput(answers), tracker);
-            Item expected = null;
-            assertThat(tracker.findById(bug.getId()),
-                    Matchers.is(expected)
-            );
+        Output output = new StubOutPut();
+        Tracker tracker = new Tracker();
+        Item item = new Item("Replaced item");
+        tracker.add(item);
+        Item replaced = new Item("New item name");
+        tracker.add(replaced);
+        Input in = new StubInput(
+                new String[] {"0", "1", "1"}
+        );
+        UserAction[] actions = {
+                new DeleteItem(output),
+                new ByBy()
+        };
+        new StartUi(output).init(in, tracker, actions);
+        assertThat(output.toString(), is("Menu." + System.lineSeparator() +
+                "0 .Delete Item" + System.lineSeparator() +
+                "1 .Exit" + System.lineSeparator() +
+                "Delete succes" + System.lineSeparator() +
+                "Menu." + System.lineSeparator() +
+                "0 .Delete Item" + System.lineSeparator() +
+                "1 .Exit" + System.lineSeparator()));
     }
 
     @Test
@@ -152,7 +173,7 @@ public class StartUiTest /*extends TestCase */{
                 new String[] {"0", Integer.toString(index), replaced.getName(), "1"}
         );
         UserAction[] actions = {
-                new ReplaceAction(),
+                new ReplaceAction(output),
                 new ByBy()
         };
         new StartUi(output).init(in, tracker, actions);
@@ -173,7 +194,7 @@ public class StartUiTest /*extends TestCase */{
                 new String[] {"1", "0", Integer.toString(index), "1", "2"}
         );
         UserAction[] actions = {
-                new DeleteItem(),
+                new DeleteItem(output),
                 new ShowItems(output),
                 new ByBy()
         };

@@ -120,8 +120,8 @@ public class StartUi {
        UserAction[] actions = {
                new CreateAction(output),
                new ShowItems(output),
-               new ReplaceAction(),
-               new DeleteItem(),
+               new ReplaceAction(output),
+               new DeleteItem(output),
                new FindByName(output),
                new FindByItem(output),
                new ByBy()
