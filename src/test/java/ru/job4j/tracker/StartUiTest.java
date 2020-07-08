@@ -31,7 +31,7 @@ public class StartUiTest /*extends TestCase */{
         );
         UserAction[] actions = {
                 new ShowItems(output),
-                new ByBy()
+                new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
         assertThat(output.toString(), is("Menu." + System.lineSeparator() +
@@ -41,7 +41,8 @@ public class StartUiTest /*extends TestCase */{
                 "id: 2 name: New item name" + System.lineSeparator() +
                 "Menu." + System.lineSeparator() +
                 "0 .Show all Items" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator()));
+                "1 .Exit" + System.lineSeparator() +
+                "See you soon!" + System.lineSeparator()));
     }
     @Test
     public void testEditItem() {
@@ -56,7 +57,7 @@ public class StartUiTest /*extends TestCase */{
         );
         UserAction[] actions = {
                 new ReplaceAction(output),
-                new ByBy()
+                new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
         assertThat(output.toString(), is("Menu." + System.lineSeparator() +
@@ -65,7 +66,8 @@ public class StartUiTest /*extends TestCase */{
                 "Replace succes" + System.lineSeparator() +
                 "Menu." + System.lineSeparator() +
                 "0 .Replase action" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator()));
+                "1 .Exit" + System.lineSeparator() +
+                "See you soon!" + System.lineSeparator()));
     }
     @Test
     public void testDeleteItem() {
@@ -80,7 +82,7 @@ public class StartUiTest /*extends TestCase */{
         );
         UserAction[] actions = {
                 new DeleteItem(output),
-                new ByBy()
+                new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
         assertThat(output.toString(), is("Menu." + System.lineSeparator() +
@@ -89,7 +91,8 @@ public class StartUiTest /*extends TestCase */{
                 "Delete succes" + System.lineSeparator() +
                 "Menu." + System.lineSeparator() +
                 "0 .Delete Item" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator()));
+                "1 .Exit" + System.lineSeparator() +
+                "See you soon!" + System.lineSeparator()));
     }
 
     @Test
@@ -105,7 +108,7 @@ public class StartUiTest /*extends TestCase */{
         );
         UserAction[] actions = {
                 new FindByItem(output),
-                new ByBy()
+                new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
         assertThat(output.toString(), is("Menu." + System.lineSeparator() +
@@ -114,7 +117,8 @@ public class StartUiTest /*extends TestCase */{
                 "id: 1 name: Replaced item" + System.lineSeparator() +
                 "Menu." + System.lineSeparator() +
                 "0 .Find By Id" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator()));
+                "1 .Exit" + System.lineSeparator() +
+                "See you soon!" + System.lineSeparator()));
     }
 
     @Test
@@ -130,7 +134,7 @@ public class StartUiTest /*extends TestCase */{
         );
         UserAction[] actions = {
                 new FindByName(output),
-                new ByBy()
+                new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
         assertThat(output.toString(), is("Menu." + System.lineSeparator() +
@@ -139,7 +143,8 @@ public class StartUiTest /*extends TestCase */{
                 "No such requests" + System.lineSeparator() +
                 "Menu." + System.lineSeparator() +
                 "0 .Find By Name" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator()));
+                "1 .Exit" + System.lineSeparator() +
+                "See you soon!" + System.lineSeparator()));
     }
 
     public void testByBy() {
@@ -154,7 +159,7 @@ public class StartUiTest /*extends TestCase */{
         Tracker tracker = new Tracker();
         UserAction[] actions = {
                 new CreateAction(output),
-                new ByBy()
+                new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
         assertThat(tracker.findAll()[0].getName(),
@@ -174,7 +179,7 @@ public class StartUiTest /*extends TestCase */{
         );
         UserAction[] actions = {
                 new ReplaceAction(output),
-                new ByBy()
+                new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
         assertThat(tracker.findById(index).getName(), is(replaced.getName()));
@@ -196,7 +201,7 @@ public class StartUiTest /*extends TestCase */{
         UserAction[] actions = {
                 new DeleteItem(output),
                 new ShowItems(output),
-                new ByBy()
+                new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
         assertThat(tracker.findById(index), is(rsl));
@@ -210,12 +215,13 @@ public class StartUiTest /*extends TestCase */{
         );
         Tracker tracker = new Tracker();
         UserAction[] actions = {
-                new ByBy()
+                new ByBy(out)
         };
         new StartUi(out).init(in, tracker, actions);
         assertThat(out.toString(), is(
                 "Menu." + System.lineSeparator() +
-                        "0 .Exit" + System.lineSeparator()
+                        "0 .Exit" + System.lineSeparator() +
+                        "See you soon!" + System.lineSeparator()
         ));
     }
 

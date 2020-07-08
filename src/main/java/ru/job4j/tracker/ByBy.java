@@ -1,6 +1,11 @@
 package ru.job4j.tracker;
 
 public class ByBy implements UserAction {
+    private final Output out;
+
+    public ByBy(Output out) {
+        this.out = out;
+    }
     @Override
     public String name() {
         return "Exit";
@@ -8,7 +13,7 @@ public class ByBy implements UserAction {
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
-        System.out.println("See you soon!");
+        out.println("See you soon!");
         return false;
     }
 }

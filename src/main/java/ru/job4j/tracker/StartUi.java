@@ -124,7 +124,7 @@ public class StartUi {
                new DeleteItem(output),
                new FindByName(output),
                new FindByItem(output),
-               new ByBy()
+               new ByBy(output)
        };
        new StartUi(output).init(input, temp, actions);
 
