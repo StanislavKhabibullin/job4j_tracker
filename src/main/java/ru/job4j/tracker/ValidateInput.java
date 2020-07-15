@@ -10,9 +10,9 @@ public class ValidateInput extends ConsoleInput{
             try {
                 value = super.askInt(question);
                 invalid = false;
-            } catch (IllegalStateException moe) {
-                System.out.println("Please select key from menu.");
             } catch (NumberFormatException nfe) {
+                System.out.println("Please enter validate data again.");
+            } catch (IllegalStateException moe) {
                 System.out.println("Please enter validate data again.");
             }
         } while (invalid);

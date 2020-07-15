@@ -80,6 +80,7 @@ public class StartUi {
                 out.println("Wrong input, you can select: 0 .. " + (actions.length - 1));
                 continue;
             }
+
             UserAction action = actions[select];
             run = action.execute(input, tracker);
            /* if (select == 0) {
