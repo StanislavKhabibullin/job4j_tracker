@@ -13,7 +13,7 @@ public class ValidateInput extends ConsoleInput{
             } catch (NumberFormatException nfe) {
                 System.out.println("Please enter validate data again.");
             } catch (IllegalStateException moe) {
-                System.out.println("Please enter validate data again.");
+                System.out.println("Please enter validate data again ILS.");
             }
         } while (invalid);
         return value;
