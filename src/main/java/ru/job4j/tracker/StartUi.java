@@ -120,7 +120,7 @@ public class StartUi {
 
     public static void main(String[] args) {
         Output output = new ConsoleOutPut();
-       Input input = new ValidateInput();
+       Input input = new ValidateInput(output, new ConsoleInput());
        Tracker temp = new Tracker();
        UserAction[] actions = {
                new CreateAction(output),
