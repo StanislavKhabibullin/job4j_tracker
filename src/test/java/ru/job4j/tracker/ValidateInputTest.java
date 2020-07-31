@@ -20,6 +20,23 @@ public class ValidateInputTest {
     }
 
     @Test
-    public void askInt() {
+    public void wenValidInput() {
+        Output out = new StubOutPut();
+        Input in = new StubInput(
+                new String[]{"1","6"}
+        );
+        ValidateInput input = new ValidateInput(out, in);
+        int selected = input.askInt("Зачем здесь вообще что то писать?");
+        assertThat(selected, is(1));
+    }
+    @Test
+    public void wenValidOutput() {
+        Output out = new StubOutPut();
+        Input in = new StubInput(
+                new String[]{"6"}
+        );
+        ValidateInput input = new ValidateInput(out, in);
+        int selected = input.askInt("Зачем здесь вообще что то писать?");
+        assertThat(selected, is(1));
     }
 }
