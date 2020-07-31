@@ -33,10 +33,11 @@ public class ValidateInputTest {
     public void wenValidOutput() {
         Output out = new StubOutPut();
         Input in = new StubInput(
-                new String[]{"6"}
+                new String[]{"one", "6"}
         );
         ValidateInput input = new ValidateInput(out, in);
-        int selected = input.askInt("Зачем здесь вообще что то писать?");
-        assertThat(selected, is(1));
+        input.askInt("QUESTION");
+
+        assertThat(out.toString(), is("Please enter validate data again.\r\n"));
     }
 }
