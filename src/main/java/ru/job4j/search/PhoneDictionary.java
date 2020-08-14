@@ -19,9 +19,8 @@ public class PhoneDictionary {
                     || value.getSurname().contains(key)
                     || value.getAddress().contains(key)
                     || value.getPhone().contains(key)) {
-                continue;
+                rezult.add(value);
             }
-            rezult.add(value);
         }
         return rezult;
     }
