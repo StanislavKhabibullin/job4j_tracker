@@ -15,10 +15,10 @@ public class PhoneDictionary {
         int i = 0;
         for (Person value:persons
              ) {
-            if (!value.getName().contains(key)
-                    && !value.getSurname().contains(key)
-                    && !value.getAddress().contains(key)
-                    && !value.getPhone().contains(key)) {
+            if (value.getName().contains(key)
+                    || value.getSurname().contains(key)
+                    || value.getAddress().contains(key)
+                    || value.getPhone().contains(key)) {
                 continue;
             }
             rezult.add(value);
