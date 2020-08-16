@@ -7,13 +7,20 @@ public class ConvertList2Array {
         int group = (int) Math.ceil(((double) list.size()) / count);
         int[][] array = new int[group][count];
         int schet = 0;
-        for (int i = 0; i < group; i++) {
-            for (int j = 0; j < count; j++) {
+        int i = 0;
+        int j = 0;
+        for (int[] row:array) {
+            for (int cell:row) {
                 if (schet < list.size()) {
-                    array[i][j] = list.get(schet++);
+                    cell = list.get(schet++);
+                    array[i][j++] = cell;
+                }
+                if (j == count) {
+                    j = 0;
                 }
             }
             System.out.println();
+            i++;
         }
         return array;
     }
