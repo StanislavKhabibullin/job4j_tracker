@@ -9,18 +9,14 @@ public class ConvertList2Array {
         int schet = 0;
         int i = 0;
         int j = 0;
-        for (int[] row:array) {
-            for (int cell:row) {
-                if (schet < list.size()) {
-                    cell = list.get(schet++);
-                    array[i][j++] = cell;
-                }
-                if (j == count) {
-                    j = 0;
-                }
-            }
-            System.out.println();
-            i++;
+        for (int scketch:list) {
+           if (j < count) {
+               array[i][j++] = scketch;
+           } else {
+               i++;
+               j = 0;
+               array[i][j++] = scketch;
+           }
         }
         return array;
     }
