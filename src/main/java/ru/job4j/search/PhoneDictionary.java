@@ -3,7 +3,7 @@ package ru.job4j.search;
 import java.util.ArrayList;
 
 public class PhoneDictionary {
-    @SuppressWarnings("checkstyle:Indentation")
+
     private ArrayList<Person> persons = new ArrayList();
 
     public void add(Person person) {

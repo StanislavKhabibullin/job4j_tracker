@@ -21,7 +21,6 @@ public class ConvertList2Array {
         return array;
     }
 
-    @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public static void main(String[] args) {
         List<Integer> list = List.of(1, 2, 3, 4, 5, 6, 7);
         int[][] result = toArray(list, 3);
