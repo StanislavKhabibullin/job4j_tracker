@@ -6,16 +6,19 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import junit.framework.TestCase;
 
-public class StartUiTest /*extends TestCase */{
+import java.util.List;
 
+@SuppressWarnings("checkstyle:WhitespaceAround")
+public class StartUiTest /*extends TestCase */{
+    @Test
     public void testCreateItem() {
         String[] answers = {"Fix PC"};
         Input input = new StubInput(answers);
         Tracker tracker = new Tracker();
         StartUi.createItem(input, tracker);
-        Item created = tracker.findAll()[0];
+        List<Item> created = tracker.findAll();
         Item expected = new Item("Fix PC");
-        assertThat(created.getName(), is(expected.getName()));
+        assertThat(created.get(0).getName(), is(expected.getName()));
     }
 
     @Test
@@ -34,16 +37,17 @@ public class StartUiTest /*extends TestCase */{
                 new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
-        assertThat(output.toString(), is("Menu." + System.lineSeparator() +
-                "0 .Show all Items" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator() +
-                "id: 1 name: Replaced item" + System.lineSeparator() +
-                "id: 2 name: New item name" + System.lineSeparator() +
-                "Menu." + System.lineSeparator() +
-                "0 .Show all Items" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator() +
-                "See you soon!" + System.lineSeparator()));
+        assertThat(output.toString(), is("Menu." + System.lineSeparator()
+                + "0 .Show all Items" + System.lineSeparator()
+                + "1 .Exit" + System.lineSeparator()
+                + "id: 1 name: Replaced item" + System.lineSeparator()
+                + "id: 2 name: New item name" + System.lineSeparator()
+                + "Menu." + System.lineSeparator()
+                + "0 .Show all Items" + System.lineSeparator()
+                + "1 .Exit" + System.lineSeparator()
+                + "See you soon!" + System.lineSeparator()));
     }
+
     @Test
     public void testEditItem() {
         Output output = new StubOutPut();
@@ -60,15 +64,17 @@ public class StartUiTest /*extends TestCase */{
                 new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
-        assertThat(output.toString(), is("Menu." + System.lineSeparator() +
-                "0 .Replase action" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator() +
-                "Replace succes" + System.lineSeparator() +
-                "Menu." + System.lineSeparator() +
-                "0 .Replase action" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator() +
-                "See you soon!" + System.lineSeparator()));
+        assertThat(output.toString(), is("Menu." + System.lineSeparator()
+                + "0 .Replase action" + System.lineSeparator()
+                + "1 .Exit" + System.lineSeparator()
+                + "Replace succes" + System.lineSeparator()
+                + "Menu." + System.lineSeparator()
+                + "0 .Replase action" + System.lineSeparator()
+                + "1 .Exit" + System.lineSeparator()
+                + "See you soon!" + System.lineSeparator()));
     }
+
+    @SuppressWarnings("checkstyle:EmptyLineSeparator")
     @Test
     public void testDeleteItem() {
         Output output = new StubOutPut();
@@ -85,14 +91,14 @@ public class StartUiTest /*extends TestCase */{
                 new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
-        assertThat(output.toString(), is("Menu." + System.lineSeparator() +
-                "0 .Delete Item" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator() +
-                "Delete succes" + System.lineSeparator() +
-                "Menu." + System.lineSeparator() +
-                "0 .Delete Item" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator() +
-                "See you soon!" + System.lineSeparator()));
+        assertThat(output.toString(), is("Menu." + System.lineSeparator()
+                + "0 .Delete Item" + System.lineSeparator()
+                + "1 .Exit" + System.lineSeparator()
+                + "Delete succes" + System.lineSeparator()
+                + "Menu." + System.lineSeparator()
+                + "0 .Delete Item" + System.lineSeparator()
+                + "1 .Exit" + System.lineSeparator()
+                + "See you soon!" + System.lineSeparator()));
     }
 
     @Test
@@ -111,14 +117,14 @@ public class StartUiTest /*extends TestCase */{
                 new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
-        assertThat(output.toString(), is("Menu." + System.lineSeparator() +
-                "0 .Find By Id" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator() +
-                "id: 1 name: Replaced item" + System.lineSeparator() +
-                "Menu." + System.lineSeparator() +
-                "0 .Find By Id" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator() +
-                "See you soon!" + System.lineSeparator()));
+        assertThat(output.toString(), is("Menu." + System.lineSeparator()
+                + "0 .Find By Id" + System.lineSeparator()
+                + "1 .Exit" + System.lineSeparator()
+                + "id: 1 name: Replaced item" + System.lineSeparator()
+                + "Menu." + System.lineSeparator()
+                + "0 .Find By Id" + System.lineSeparator()
+                + "1 .Exit" + System.lineSeparator()
+                + "See you soon!" + System.lineSeparator()));
     }
 
     @Test
@@ -137,14 +143,14 @@ public class StartUiTest /*extends TestCase */{
                 new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
-        assertThat(output.toString(), is("Menu." + System.lineSeparator() +
-                "0 .Find By Name" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator() +
-                "No such requests" + System.lineSeparator() +
-                "Menu." + System.lineSeparator() +
-                "0 .Find By Name" + System.lineSeparator() +
-                "1 .Exit" + System.lineSeparator() +
-                "See you soon!" + System.lineSeparator()));
+        assertThat(output.toString(), is("Menu." + System.lineSeparator()
+                + "0 .Find By Name" + System.lineSeparator()
+                + "1 .Exit" + System.lineSeparator()
+                + "No such requests" + System.lineSeparator()
+                + "Menu." + System.lineSeparator()
+                + "0 .Find By Name" + System.lineSeparator()
+                + "1 .Exit" + System.lineSeparator()
+                + "See you soon!" + System.lineSeparator()));
     }
 
     public void testByBy() {
@@ -162,7 +168,7 @@ public class StartUiTest /*extends TestCase */{
                 new ByBy(output)
         };
         new StartUi(output).init(in, tracker, actions);
-        assertThat(tracker.findAll()[0].getName(),
+        assertThat(tracker.findAll().get(0).getName(),
                 is("Item Name"));
     }
 
@@ -219,9 +225,9 @@ public class StartUiTest /*extends TestCase */{
         };
         new StartUi(out).init(in, tracker, actions);
         assertThat(out.toString(), is(
-                "Menu." + System.lineSeparator() +
-                        "0 .Exit" + System.lineSeparator() +
-                        "See you soon!" + System.lineSeparator()
+                "Menu." + System.lineSeparator()
+                        + "0 .Exit" + System.lineSeparator()
+                        + "See you soon!" + System.lineSeparator()
         ));
     }
 

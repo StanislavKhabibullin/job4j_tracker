@@ -7,10 +7,11 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class TrackerTest {
+
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
-        Item item = new Item(0,"test1");
+        Item item = new Item(0, "test1");
         tracker.add(item);
         Item result = tracker.findById(item.getId());
         assertThat(result.getName(), is(item.getName()));
@@ -22,7 +23,7 @@ public class TrackerTest {
         Item bug = new Item("New Item");
         test.add(bug);
         Item expected = new Item("Replace Item");
-        test.replace(bug.getId(),expected);
+        test.replace(bug.getId(), expected);
         Item result = test.findById(bug.getId());
         assertThat(
                 result.getName(),

@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
 
+import java.util.List;
+
 public class StartUi {
 
     private final Output out;
@@ -16,10 +18,10 @@ public class StartUi {
     }
 
     public static void showItems(Tracker tracker) {
-        Item[] mas = tracker.findAll();
-        for (int i = 0; i < mas.length; i++) {
-            System.out.println("id: " + mas[i].getId() +
-                    " name: " + mas[i].getName());
+        List<Item> mas = tracker.findAll();
+        for (int i = 0; i < mas.size(); i++) {
+            System.out.println("id: " + mas.get(i).getId()
+                    + " name: " + mas.get(i).getName());
         }
     }
 
@@ -47,8 +49,8 @@ public class StartUi {
         int promt = input.askInt("Input id elements you want to find: ");
         Item temp = tracker.findById(promt);
         if (temp != null) {
-            System.out.println("id: " + temp.getId() +
-                    " name: " + temp.getName());
+            System.out.println("id: " + temp.getId()
+                    + " name: " + temp.getName());
         } else {
             System.out.println("No such id");
         }
@@ -56,11 +58,11 @@ public class StartUi {
 
     public static void findByName(Input input, Tracker tracker) {
         String inp = input.askStr("Input the name of request you want to find");
-        Item[] temp = tracker.findByName(inp);
-        if (temp.length > 0) {
-            for (int i = 0; i < temp.length; i++) {
-                System.out.println("id: " + temp[i].getId() +
-                        " name: " + temp[i].getName());
+        List<Item> temp = tracker.findByName(inp);
+        if (temp.size() > 0) {
+            for (int i = 0; i < temp.size(); i++) {
+                System.out.println("id: " + temp.get(i).getId()
+                        + " name: " + temp.get(i).getId());
             }
         } else {
             System.out.println("No such requests");
@@ -116,8 +118,7 @@ public class StartUi {
         }
     }
 
-
-
+    @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public static void main(String[] args) {
         Output output = new ConsoleOutPut();
        Input input = new ValidateInput(output, new ConsoleInput());
@@ -132,6 +133,5 @@ public class StartUi {
                new ByBy(output)
        };
        new StartUi(output).init(input, temp, actions);
-
     }
 }
