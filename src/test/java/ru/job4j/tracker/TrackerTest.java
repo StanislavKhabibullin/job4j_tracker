@@ -2,6 +2,9 @@ package ru.job4j.tracker;
 
 import org.hamcrest.Matcher;
 import org.junit.Test;
+
+import java.util.Collections;
+
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -44,5 +47,43 @@ public class TrackerTest {
         assertThat(tracker.findById(bug.getId()),
                 is(expected)
                 );
+    }
+
+    @Test
+    public void whenSortUp() {
+        Tracker test = new Tracker();
+        Item first = new Item("first");
+        Item second = new Item("second");
+        Item third = new Item("fird");
+        test.add(first);
+        test.add(second);
+        test.add(third);
+        Collections.sort(test.findAll(), new TrackerSortById());
+        Tracker expected = new Tracker();
+        expected.add(third);
+        expected.add(first);
+        expected.add(second);
+        assertThat(test.findAll(),
+                is(expected.findAll())
+        );
+    }
+
+    @Test
+    public void whenSortDown() {
+        Tracker test = new Tracker();
+        Item first = new Item("first");
+        Item second = new Item("second");
+        Item third = new Item("fird");
+        test.add(first);
+        test.add(second);
+        test.add(third);
+        Collections.sort(test.findAll(), new TrackerSortByIdDown());
+        Tracker expected = new Tracker();
+        expected.add(second);
+        expected.add(first);
+        expected.add(third);
+        assertThat(test.findAll(),
+                is(expected.findAll())
+        );
     }
 }
