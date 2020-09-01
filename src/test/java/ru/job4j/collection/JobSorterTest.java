@@ -97,4 +97,24 @@ public class JobSorterTest {
         );
         assertThat(rsl, is(1));
     }
+
+    @Test
+    public void whenPriorityUp() {
+        Comparator<Job> comp = new JobDeskByPriorityUp();
+        int rsl = comp.compare(
+                new Job("Fix bu", 1),
+                new Job("Aix bug", 2)
+        );
+        assertThat(rsl, lessThan(0));
+    }
+
+    @Test
+    public void whenDeskByNameUp() {
+        Comparator<Job> comp = new JobDeskByNameUp();
+        int rsl = comp.compare(
+                new Job("Aix bu", 2),
+                new Job("Fix bug", 1)
+        );
+        assertThat(rsl, lessThan(0));
+    }
 }
