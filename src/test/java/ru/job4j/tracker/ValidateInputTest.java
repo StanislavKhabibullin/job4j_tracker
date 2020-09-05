@@ -23,12 +23,14 @@ public class ValidateInputTest {
     public void wenValidInput() {
         Output out = new StubOutPut();
         Input in = new StubInput(
-                new String[]{"1","6"}
+                new String[]{"1", "6"}
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Зачем здесь вообще что то писать?");
         assertThat(selected, is(1));
     }
+
+    @SuppressWarnings("checkstyle:EmptyLineSeparator")
     @Test
     public void wenValidOutput() {
         Output out = new StubOutPut();

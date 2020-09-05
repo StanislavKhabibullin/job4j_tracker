@@ -9,7 +9,7 @@ import junit.framework.TestCase;
 import java.util.List;
 
 @SuppressWarnings("checkstyle:WhitespaceAround")
-public class StartUiTest /*extends TestCase */{
+public class StartUiTest /*extends TestCase */ {
     @Test
     public void testCreateItem() {
         String[] answers = {"Fix PC"};

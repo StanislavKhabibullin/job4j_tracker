@@ -17,8 +17,8 @@ public class FindByItem implements UserAction {
         int promt = input.askInt("Input id elements you want to find: ");
         Item temp = tracker.findById(promt);
         if (temp != null) {
-            out.println("id: " + temp.getId() +
-                    " name: " + temp.getName());
+            out.println("id: " + temp.getId()
+                    + " name: " + temp.getName());
         } else {
             out.println("No such id");
         }
