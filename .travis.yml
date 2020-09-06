@@ -19,6 +19,7 @@ notifications:
     on_success: never # default: change
     on_failure: always # defa,ult: always
 
+# код взят с сайта https://codecov.io/ для чего он нужен нихрена не понятно
 env:
   global:
       - CODECOV_TOKEN="2c9638de-957e-4591-b953-6e84324ccdb3"
