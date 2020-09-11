@@ -19,12 +19,11 @@ public class Department {
             for (int i = 1; i < subStr.length; i++) {
                 promt = promt + "/" + subStr[i];
                 expect.add(promt);
+
             }
         }
-        for (String rot:expect
-             ) {
-            rsl.add(rot);
-        }
+        rsl.addAll(expect);
+        Collections.sort(rsl);
         return rsl;
     }
 
@@ -43,11 +42,9 @@ public class Department {
         List<String> test = new ArrayList<>();
         List<String> testX = new ArrayList<>();
         test.add("K1/SK1/SSK1");
-        test.add("K1/SK1");
-        test.add("K1");
+       /* test.add("K1/SK1");
+        test.add("K1"); */
         test.add("K2/SK1/SSK2");
-        test.add("K2");
-        test.add("K2/SK1");
         testX.addAll(fillGaps(test));
         System.out.println(testX);
         testX = sortAsk(testX);
