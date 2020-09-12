@@ -8,9 +8,9 @@ public class SortAskDep implements Comparator<String> {
     public int compare(String o1, String o2) {
         int rsl = 0;
 
-        String[] o1list = new String[o1.length()];
-        String[] o2List = new String[o2.length()];
-        int i = 0;
+        String[] o1list = o1.split("/");
+        String[] o2List = o2.split("/");
+       /* int i = 0;
         for (String schet:o1.split("/")
              ) {
             o1list[i] = schet;
@@ -21,7 +21,7 @@ public class SortAskDep implements Comparator<String> {
         ) {
             o2List[i] = schet;
             i++;
-        }
+        } */
         rsl = o2List[0].compareTo(o1list[0]);
         if (rsl == 0) {
             return o1.compareTo(o2);
