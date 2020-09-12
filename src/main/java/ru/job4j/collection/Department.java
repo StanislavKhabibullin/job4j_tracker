@@ -1,16 +1,13 @@
 package ru.job4j.collection;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class Department {
 
     public static List<String> fillGaps(List<String> deps) {
         ArrayList<String> rsl = new ArrayList<>();
         String[] subStr;
-        HashSet<String> expect = new HashSet<>();
+        Set<String> expect = new TreeSet<>();
         for (String schet:deps
              ) {
             subStr = schet.split("/");
@@ -23,7 +20,6 @@ public class Department {
             }
         }
         rsl.addAll(expect);
-        Collections.sort(rsl);
         return rsl;
     }
 

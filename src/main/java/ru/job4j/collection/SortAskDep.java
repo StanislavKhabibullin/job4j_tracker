@@ -6,20 +6,26 @@ import java.util.Comparator;
 public class SortAskDep implements Comparator<String> {
 
     public int compare(String o1, String o2) {
+        int rsl = 0;
 
-        ArrayList<String> o1list = new ArrayList<>();
-        ArrayList<String> o2List = new ArrayList<>();
+        String[] o1list = new String[o1.length()];
+        String[] o2List = new String[o2.length()];
+        int i = 0;
         for (String schet:o1.split("/")
              ) {
-            o1list.add(schet);
+            o1list[i] = schet;
+            i++;
         }
+        i = 0;
         for (String schet:o2.split("/")
         ) {
-            o2List.add(schet);
+            o2List[i] = schet;
+            i++;
         }
-        if (o1list.get(0).equals(o2List.get(0))) {
+        rsl = o2List[0].compareTo(o1list[0]);
+        if (rsl == 0) {
             return o1.compareTo(o2);
         }
-        return o2.compareTo(o1);
+        return rsl;
     }
 }
