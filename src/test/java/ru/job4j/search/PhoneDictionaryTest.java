@@ -21,4 +21,15 @@ public class PhoneDictionaryTest {
         assertThat(rezult.get(0).getSurname(), is("Arsentev"));
 
     }
+
+    @Test
+    public void findByNamePredicate() {
+        PhoneDictionary phone = new PhoneDictionary();
+        phone.add(
+                new Person("Petr", "Arsentev", "534872", "Bryansk")
+        );
+        ArrayList<Person> rezult = phone.findPredicat("Pet");
+        assertThat(rezult.get(0).getSurname(), is("Arsentev"));
+
+    }
 }
