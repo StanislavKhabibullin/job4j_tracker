@@ -39,12 +39,15 @@ public class Profile {
 
     public List<Adress> collect(List<Profile> profiles) {
 
-                return profiles.stream().map(adres -> adres.adress).collect(Collectors.toList());
+                return profiles.stream().map(adres -> adres.getAdress()).collect(Collectors.toList());
     }
 
     public List<Adress> sortick(List<Profile> profiles) {
         profiles.sort(new AdressCompare());
-        profiles.stream().distinct();
-        return profiles.stream().map(adres -> adres.adress).collect(Collectors.toList());
+        List<Adress> result = profiles.stream().
+                distinct().
+                map(adres -> adres.getAdress()).
+                collect(Collectors.toList());
+        return result;
     }
 }
