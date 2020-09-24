@@ -22,7 +22,7 @@ public class ProfileTest {
 
     @Test
     public void collect() {
-        Profile first = new Profile();
+        ProfileRelise first = new ProfileRelise();
    List<Adress> exp = new ArrayList<>();
    exp.add(new Adress("City3", "Lenina", 10, 15));
    exp.add(new Adress("City2", "Lenina56", 1, 14));
@@ -36,7 +36,7 @@ public class ProfileTest {
 
     @Test
     public void sortick() {
-        Profile first = new Profile();
+        ProfileRelise first = new ProfileRelise();
         List<Adress> exp = new ArrayList<>();
         exp.add(new Adress("City2", "Lenina56", 1, 14));
         exp.add(new Adress("City3", "Lenina", 10, 15));

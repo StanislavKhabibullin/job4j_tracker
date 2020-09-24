@@ -32,22 +32,9 @@ public class Profile {
         return adress == profile.adress;
     }
 
+    @SuppressWarnings("checkstyle:EmptyLineSeparator")
     @Override
     public int hashCode() {
         return Objects.hash(adress);
-    }
-
-    public List<Adress> collect(List<Profile> profiles) {
-
-                return profiles.stream().map(adres -> adres.getAdress()).collect(Collectors.toList());
-    }
-
-    public List<Adress> sortick(List<Profile> profiles) {
-        profiles.sort(new AdressCompare());
-        List<Adress> result = profiles.stream().
-                distinct().
-                map(adres -> adres.getAdress()).
-                collect(Collectors.toList());
-        return result;
     }
 }
