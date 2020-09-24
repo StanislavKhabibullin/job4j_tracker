@@ -11,6 +11,7 @@ public class ProfileRelise {
     }
 
     public List<Adress> sortick(List<Profile> profiles) {
+        // сортировка
         List<Adress> result = profiles.stream().
                 map(adres -> adres.getAdress()).sorted(new AdressCompareByCity()).
                 distinct().collect(Collectors.toList());
