@@ -1,8 +1,8 @@
 package ru.job4j.stream;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 import java.util.function.Predicate;
 
 import static org.junit.Assert.*;
@@ -61,5 +61,17 @@ public class SchoolTest {
         expect.add(new Student(60, "Surname6"));
         assertThat(rezult, is(expect));
 
+    }
+
+    @Test
+    public void inMap() {
+        School sc = new School();
+        Predicate<Student> pr = x -> x.getScope() >= 50 && x.getScope() < 70;
+        List<Student> rezult = sc.collect(students, pr);
+        Map<String, Student> result = sc.listToMap(rezult);
+        Map<String, Student> expect = new HashMap<>();
+        expect.put("Surname5", new Student(50, "Surname5"));
+        expect.put("Surname6", new Student(60, "Surname6"));
+        assertThat(result, is(expect));
     }
 }
