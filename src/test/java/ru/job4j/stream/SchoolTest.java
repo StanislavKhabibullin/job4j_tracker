@@ -67,7 +67,10 @@ public class SchoolTest {
     public void inMap() {
         School sc = new School();
         Predicate<Student> pr = x -> x.getScope() >= 50 && x.getScope() < 70;
-        List<Student> rezult = sc.collect(students, pr);
+        List<Student> studentstest = new ArrayList<>();
+        studentstest = students;
+        studentstest.add(new Student(50, "Surname5"));
+        List<Student> rezult = sc.collect(studentstest, pr);
         Map<String, Student> result = sc.listToMap(rezult);
         Map<String, Student> expect = new HashMap<>();
         expect.put("Surname5", new Student(50, "Surname5"));
