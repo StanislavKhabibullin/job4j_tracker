@@ -10,7 +10,12 @@ public class MatrixToList {
                 List.of(9, 8, 7)
         );
         System.out.println(matrix);
-        List<Integer> result = matrix.stream().flatMap(element -> element.stream()).collect(Collectors.toList());
+        MatrixToList rsl = new MatrixToList();
+        List<Integer> result = rsl.tranfer(matrix);
         System.out.println(result);
+    }
+
+    public List<Integer> tranfer(List<List<Integer>> matrix) {
+        return matrix.stream().flatMap(element -> element.stream()).collect(Collectors.toList());
     }
 }

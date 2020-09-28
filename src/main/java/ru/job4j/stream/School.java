@@ -12,11 +12,12 @@ public class School {
         return students.stream().filter(predict).collect(Collectors.toList());
     }
 
-    public Map<String, Student> listToMap(List<Student> students) {
+   public Map<String, Student> listToMap(List<Student> students) {
 
         Map<String, Student> studentMap = students.stream().distinct().
                 collect(Collectors.toMap(student -> student.getSurname(),
-                        student -> student));
+                        student -> student
+                        ));
 
         return studentMap;
     }
