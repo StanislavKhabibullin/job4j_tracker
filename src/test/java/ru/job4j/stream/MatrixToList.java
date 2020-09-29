@@ -16,8 +16,6 @@ public class MatrixToList {
     }
 
     public List<Integer> tranfer(Integer[][] matrix) {
-
-        List<List<Integer>> rsl = Arrays.stream(matrix).map(Arrays::asList).collect(Collectors.toList());
-        return rsl.stream().flatMap(el -> el.stream()).collect(Collectors.toList());
+      return Arrays.stream(matrix).flatMap(Arrays::stream).collect(Collectors.toList());
     }
 }
