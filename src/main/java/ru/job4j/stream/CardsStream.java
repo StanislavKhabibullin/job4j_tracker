@@ -13,11 +13,18 @@ public class CardsStream {
         System.out.println(cards);
         List<Suit> suits = Stream.of(Suit.values()).collect(Collectors.toList());
         List<Value> values = Stream.of(Value.values()).collect(Collectors.toList());
-        for (Suit suit : suits) {
+       /* for (Suit suit : suits) {
             for (Value value: values) {
                 cards.add(new Cards(suit, value));
             }
-        }
+        } */
+        Stream.of(Suit.values()).flatMap((su) -> {
+            return Stream.of(Value.values()).flatMap(y -> {
+               cards.add(new Cards(su, y));
+                return null;
+            });
+        }).collect(Collectors.toList());
         System.out.println(cards);
+
     }
 }
