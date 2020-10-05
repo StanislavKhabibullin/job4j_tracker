@@ -18,12 +18,20 @@ public class CardsStream {
                 cards.add(new Cards(suit, value));
             }
         } */
-        Stream.of(Suit.values()).flatMap((su) -> {
+
+       /* Stream.of(Suit.values()).flatMap((su) -> {
             return Stream.of(Value.values()).flatMap(y -> {
                cards.add(new Cards(su, y));
                 return null;
             });
         }).collect(Collectors.toList());
+
+        */
+
+        Stream.of(Suit.values()).flatMap((su) -> {
+            return Stream.of(Value.values()).map(y -> cards.add(new Cards(su, y)));
+        }).collect(Collectors.toList());
+
         System.out.println(cards);
 
     }
