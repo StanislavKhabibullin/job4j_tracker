@@ -13,8 +13,8 @@ public class PhoneDictionary {
 
     public ArrayList<Person> find(String key) {
         ArrayList<Person> rezult = new ArrayList<>();
-        int i = 0;
-        for (Person value:persons
+        var i = 0;
+        for (var value:persons
              ) {
             if (value.getName().contains(key)
                     || value.getSurname().contains(key)
@@ -33,7 +33,7 @@ public class PhoneDictionary {
         Predicate<Person> address = x -> x.getAddress().contains(key);
         Predicate<Person> getPhone = x -> x.getPhone().contains(key);
         Predicate<Person> combine = name.or(surname).or(address).or(getPhone);
-        for (Person value:persons
+        for (var value:persons
         ) {
             if (combine.test(value)) {
                 result.add(value);
