@@ -18,8 +18,8 @@ public class BankService {
     }
 
     public Optional<User> findByPassport(String passport) {
-        Optional<User> optionalUser = Optional.ofNullable(users.keySet().stream().
-                filter(x -> x.getPassport().equals(passport)).findFirst().orElse(null));
+        Optional<User> optionalUser = users.keySet().stream().
+                filter(x -> x.getPassport().equals(passport)).findFirst();
         return optionalUser;
 
          /*   for (User name:users.keySet()
@@ -36,9 +36,9 @@ public class BankService {
         if (!user.isPresent()) {
             return null;
         }
-        Optional<Account> result = Optional.of(users.get(user.get()).stream().
+        Optional<Account> result = users.get(user.get()).stream().
                 filter(x -> x.getRequisite().equals(requisite)).
-                findFirst().orElse(null));
+                findFirst();
            return result;
         /*
         if (user != null) {
