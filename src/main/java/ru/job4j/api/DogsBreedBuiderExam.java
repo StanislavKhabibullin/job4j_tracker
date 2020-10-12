@@ -1,8 +1,12 @@
 package ru.job4j.api;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static ru.job4j.api.Job4jStream.of;
 
 public class DogsBreedBuiderExam {
 
@@ -66,10 +70,13 @@ public class DogsBreedBuiderExam {
         DogsBreedBuiderExam fourth = new Builder("shepherd")
                 .setColor("black")
                 .setAge(3).builderExam();
-        List<String> expect = Stream.of(first, second, third, fourth)
-                .filter(x -> x.getAge() > 3)
-                .map((x) -> "породы с возрастом более трех лет: " + (x.getBreed()) + "\n")
+
+        List<String> expect2 = Job4jStream.of(first, third, second, fourth)
+                .map(x -> (DogsBreedBuiderExam) x)
+                .filter(v -> v.age > 3)
+                .map(x -> "породы с возрастом более трех лет: " + (x.getBreed()) + "\n")
                 .collect(Collectors.toList());
-        System.out.println(expect);
+
+        System.out.println(expect2);
     }
 }
