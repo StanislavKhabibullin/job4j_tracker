@@ -70,7 +70,7 @@ public class DogsBreedBuiderExam {
         DogsBreedBuiderExam fourth = new Builder("shepherd")
                 .setColor("black")
                 .setAge(3).builderExam();
-
+// добавляется лишний map чтобы привести Object к требуемому типу
         List<String> expect2 = Job4jStream.of(first, third, second, fourth)
                 .map(x -> (DogsBreedBuiderExam) x)
                 .filter(v -> v.age > 3)

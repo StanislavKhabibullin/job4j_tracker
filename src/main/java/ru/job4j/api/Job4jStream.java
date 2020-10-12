@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 public interface Job4jStream extends Stream {
 
+    // добавляется лишний map чтобы привести Object к требуемому типу в коде
     static Stream<Object> of(Object e1, Object e2, Object e3, Object e4) {
         List<Object> objects = List.of(e1, e2, e3, e4);
         return objects.stream();
