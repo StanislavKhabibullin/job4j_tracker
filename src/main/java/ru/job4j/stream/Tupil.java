@@ -11,6 +11,10 @@ public class Tupil {
         this.score = score;
     }
 
+    public double getScore() {
+        return score;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
