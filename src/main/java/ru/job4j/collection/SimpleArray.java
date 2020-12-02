@@ -1,16 +1,13 @@
 package ru.job4j.collection;
 
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 public class SimpleArray<T> implements Iterable<T> {
     private int count = 0;
     private int modcount = 0;
 
-    private Object[] container = new Object[count];
+    private Object[] container = new Object[10];
 
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public T get(int index) {
@@ -20,16 +17,13 @@ public class SimpleArray<T> implements Iterable<T> {
 
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public void add(T model) {
-        Object[] conteiner1 = new Object[count + 1];
-        for (int i = 0; i < container.length; i++) {
-            conteiner1[i] = container[i];
+        if (count == container.length) {
+            container = Arrays.copyOf(container, count + 1);
+            container[count++] = model;
+        } else {
+            container[count++] = model;
+            modcount++;
         }
-        conteiner1[count] = model;
-        count++;
-        container = new Object[count];
-        container = conteiner1;
-        modcount++;
-
     }
 
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
@@ -68,6 +62,11 @@ public class SimpleArray<T> implements Iterable<T> {
         words.add("fourth");
         words.add("fifth");
         words.add("sixth");
+        words.add("seventh");
+        words.add("eighth");
+        words.add("ninth");
+        words.add("tenth");
+        words.add("eleventh");
 
         Iterator<String> iterator = words.iterator();
 
