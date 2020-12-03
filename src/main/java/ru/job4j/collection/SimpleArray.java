@@ -18,12 +18,11 @@ public class SimpleArray<T> implements Iterable<T> {
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public void add(T model) {
         if (count == container.length) {
-            container = Arrays.copyOf(container, count + 1);
-            container[count++] = model;
-        } else {
+            container = Arrays.copyOf(container, count * 2);
+        }
             container[count++] = model;
             modcount++;
-        }
+
     }
 
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
