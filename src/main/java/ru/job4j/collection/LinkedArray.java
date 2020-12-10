@@ -10,27 +10,30 @@ import java.util.Objects;
 public class LinkedArray<E> implements Iterable<E> {
     private int count = 0;
     private int modcount = 0;
-    private Node<E>[] nodes = new Node[10];
+    private Node<E> nodes;
 
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public void add(E element) {
         if (count == 0) {
-            nodes[count] = new Node<>(element, null, null);
+            nodes = new Node<>(element, null);
         } else {
-            nodes[count] = new Node<>(element, null, nodes[count - 1]);
-            nodes[count - 1].next = nodes[count];
+            Node<E> rsl = new Node<>(element, null);
+            nodes.next = rsl;
         }
         count++;
-        modcount++;
-        if (count == nodes.length) {
-            nodes = Arrays.copyOf(nodes, count * 2);
-        }
     }
 
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public E get(int index) {
         Objects.checkIndex(index, count);
-        return nodes[index].item;
+        int i = 0;
+        while (nodes.next != null) {
+            if (i == index) {
+                return nodes.item;
+            }
+            i++;
+        }
+       return null;
     }
 
     @Override
@@ -48,7 +51,7 @@ public class LinkedArray<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return nodes[position++].item;
+                return nodes.next.item;
             }
         };
     }
