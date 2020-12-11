@@ -11,14 +11,15 @@ public class LinkedArray<E> implements Iterable<E> {
     private int count = 0;
     private int modcount = 0;
     private Node<E> nodes;
+    private Node<E> current;
 
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public void add(E element) {
         if (count == 0) {
             nodes = new Node<>(element, null);
         } else {
-            Node<E> rsl = new Node<>(element, null);
-            nodes.next = rsl;
+            Node<E> newNode = new Node<>(element, nodes);
+            nodes = newNode;
         }
         count++;
     }
@@ -38,7 +39,7 @@ public class LinkedArray<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        int expectModCount = modcount;
+        current = nodes;
         return new Iterator<E>() {
             private int position = 0;
             @Override
@@ -51,16 +52,26 @@ public class LinkedArray<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return nodes.next.item;
+                position++;
+                E value = current.item;
+                current = current.next;
+                return value;
             }
         };
     }
 
+    @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public static void main(String[] args) {
         LinkedArray<String> words = new LinkedArray<>();
         words.add("first");
         words.add("second");
         words.add("third");
+
+        Iterator<String> iterator1 = words.iterator();
+        while (iterator1.hasNext()) {
+            System.out.println(iterator1.next());
+        }
+
         words.add("fourth");
         words.add("fifth");
         words.add("sixth");
@@ -69,7 +80,7 @@ public class LinkedArray<E> implements Iterable<E> {
         words.add("ninth");
         words.add("tenth");
         words.add("eleventh");
-
+        System.out.println("Full test:");
         Iterator<String> iterator = words.iterator();
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
