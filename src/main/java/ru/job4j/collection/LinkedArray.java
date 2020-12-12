@@ -11,7 +11,6 @@ public class LinkedArray<E> implements Iterable<E> {
     private int count = 0;
     private int modcount = 0;
     private Node<E> nodes;
-    private Node<E> current;
 
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public void add(E element) {
@@ -20,6 +19,20 @@ public class LinkedArray<E> implements Iterable<E> {
         } else {
             Node<E> newNode = new Node<>(element, nodes);
             nodes = newNode;
+        }
+        count++;
+    }
+
+    @SuppressWarnings("checkstyle:LeftCurly")
+    public void addLast(E element) {
+        if (count == 0) {
+            nodes = new Node<>(element, null);
+        } else {
+            Node<E> newNode = nodes;
+            while (newNode.next != null) {
+                newNode = newNode.next;
+            }
+            newNode.next = new Node<>(element, null);
         }
         count++;
     }
@@ -39,8 +52,8 @@ public class LinkedArray<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        current = nodes;
         return new Iterator<E>() {
+            private Node<E> currentTest = nodes;
             private int position = 0;
             @Override
             public boolean hasNext() {
@@ -53,8 +66,8 @@ public class LinkedArray<E> implements Iterable<E> {
                     throw new NoSuchElementException();
                 }
                 position++;
-                E value = current.item;
-                current = current.next;
+                E value = currentTest.item;
+                currentTest = currentTest.next;
                 return value;
             }
         };
@@ -62,7 +75,7 @@ public class LinkedArray<E> implements Iterable<E> {
 
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public static void main(String[] args) {
-        LinkedArray<String> words = new LinkedArray<>();
+      /*  LinkedArray<String> words = new LinkedArray<>();
         words.add("first");
         words.add("second");
         words.add("third");
@@ -86,6 +99,18 @@ public class LinkedArray<E> implements Iterable<E> {
             System.out.println(iterator.next());
         }
 
+       */
+        LinkedArray<String> test = new LinkedArray<>();
+        test.addLast("first");
+        test.addLast("second");
+        test.addLast("third");
+        test.addLast("fourth");
+        test.addLast("fifth");
+        System.out.println("Full test when add last element:");
+        Iterator<String> iteratorTest = test.iterator();
+        while (iteratorTest.hasNext()) {
+            System.out.println(iteratorTest.next());
+        }
     }
 
     }
