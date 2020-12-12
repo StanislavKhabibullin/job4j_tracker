@@ -30,6 +30,18 @@ public class ForwardLinked<T> implements Iterable<T> {
     return value;
     }
 
+    public T deleteLast() {
+        Node<T> rsl = head;
+        Node<T> fin = head;
+        while (rsl.next != null) {
+            fin = rsl;
+            rsl = rsl.next;
+        }
+        T value = rsl.item;
+        fin.next = null;
+        return value;
+    }
+
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     @NotNull
     @Override
