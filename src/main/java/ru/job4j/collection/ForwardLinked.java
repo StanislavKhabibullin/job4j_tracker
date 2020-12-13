@@ -54,10 +54,7 @@ public class ForwardLinked<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                if (node != null) {
-                    return true;
-                }
-                return false;
+                return node != null;
             }
 
             @Override
