@@ -15,16 +15,18 @@ public class SimpleQueue<T> {
     private int countOut = 0;
 
     public T poll() {
-
+    if (countOut == 0) {
         for (int i = 0; i < count; i++) {
             T rsl = in.pop();
             out.push(rsl);
             System.out.println("var = " + rsl);
-
+            countOut++;
             }
-        T result = out.pop();
         count = 0;
+    }
 
+        T result = out.pop();
+        countOut--;
         return result;
 
      }
@@ -38,14 +40,14 @@ public class SimpleQueue<T> {
         SimpleQueue<Integer> stick = new SimpleQueue<>();
         stick.push(1);
         stick.push(2);
-
+       System.out.println(stick.poll());
         stick.push(3);
 
         stick.push(4);
        System.out.println("Stack:");
        System.out.println(stick.poll());
        System.out.println(stick.poll());
-       System.out.println(stick.poll());
+
        System.out.println(stick.poll());
 
     }
