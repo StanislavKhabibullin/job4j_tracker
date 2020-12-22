@@ -3,13 +3,18 @@ package ru.job4j.collection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ForwardLinked<T> implements Iterable<T> {
 
     private Node<T> head;
+    private Node<T> rev;
+    private int count = 0;
 
+    @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public void add(T value) {
+        count++;
         if (head == null) {
             head = new Node<>(value, null);
             return;
@@ -48,6 +53,20 @@ public class ForwardLinked<T> implements Iterable<T> {
         return value;
     }
 
+    public void revert() {
+
+       if (head.next != null) {
+           Node<T> current = head.next;
+           head.next = null;
+           while (current != null) {
+               Node<T> next = current.next;
+               current.next = head;
+               head = current;
+               current = next;
+           }
+       }
+    }
+
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     @NotNull
     @Override
@@ -71,5 +90,22 @@ public class ForwardLinked<T> implements Iterable<T> {
             }
         };
 
+    }
+
+    public static void main(String[] args) {
+        ForwardLinked<Integer> numbers = new ForwardLinked<>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        Iterator<Integer> iterator = numbers.iterator();
+        while (iterator.hasNext()) {
+            System.out.println("var = " + iterator.next());
+        }
+        numbers.revert();
+        Iterator<Integer> iterator1 = numbers.iterator();
+        while (iterator1.hasNext()) {
+            System.out.println("varRevert = " + iterator1.next());
+        }
     }
 }
