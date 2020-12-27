@@ -3,18 +3,13 @@ package ru.job4j.collection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ForwardLinked<T> implements Iterable<T> {
 
     private Node<T> head;
-    private Node<T> rev;
-    private int count = 0;
 
-    @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public void add(T value) {
-        count++;
         if (head == null) {
             head = new Node<>(value, null);
             return;
@@ -32,9 +27,7 @@ public class ForwardLinked<T> implements Iterable<T> {
         }
         T value = head.item;
         head.item = null;
-        Node<T> rsl = head.next;
-        head = rsl;
-
+        head = head.next;
     return value;
     }
 
@@ -54,7 +47,9 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     public void revert() {
-
+        if (head == null) {
+            throw new NoSuchElementException();
+        }
        if (head != null && head.next != null) {
            Node<T> current = head.next;
            head.next = null;
@@ -71,7 +66,7 @@ public class ForwardLinked<T> implements Iterable<T> {
     @NotNull
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             Node<T> node = head;
 
             @Override
@@ -84,9 +79,9 @@ public class ForwardLinked<T> implements Iterable<T> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                T vlue = node.item;
+                T value = node.item;
                 node = node.next;
-                return vlue;
+                return value;
             }
         };
 
@@ -98,14 +93,12 @@ public class ForwardLinked<T> implements Iterable<T> {
         numbers.add(2);
         numbers.add(3);
         numbers.add(4);
-        Iterator<Integer> iterator = numbers.iterator();
-        while (iterator.hasNext()) {
-            System.out.println("var = " + iterator.next());
+        for (Integer integer : numbers) {
+            System.out.println("var = " + integer);
         }
         numbers.revert();
-        Iterator<Integer> iterator1 = numbers.iterator();
-        while (iterator1.hasNext()) {
-            System.out.println("varRevert = " + iterator1.next());
+        for (Integer number : numbers) {
+            System.out.println("varRevert = " + number);
         }
     }
 }
