@@ -1,6 +1,5 @@
 package ru.job4j.collection;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Iterator;

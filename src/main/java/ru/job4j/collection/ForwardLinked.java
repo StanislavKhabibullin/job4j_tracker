@@ -1,7 +1,5 @@
 package ru.job4j.collection;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -63,7 +61,6 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
-    @NotNull
     @Override
     public Iterator<T> iterator() {
         return new Iterator<>() {

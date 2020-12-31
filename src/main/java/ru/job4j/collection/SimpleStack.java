@@ -1,6 +1,6 @@
 package ru.job4j.collection;
 
-import org.jetbrains.annotations.NotNull;
+
 
 import java.util.Iterator;
 
@@ -21,7 +21,7 @@ public class SimpleStack<T> implements Iterable<T> {
     linked.add(value);
     }
 
-    @NotNull
+    @SuppressWarnings("checkstyle:EmptyLineSeparator")
     @Override
     public Iterator<T> iterator() {
         return linked.iterator();

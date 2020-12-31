@@ -1,7 +1,5 @@
 package ru.job4j.collection;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
