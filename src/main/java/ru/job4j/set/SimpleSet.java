@@ -8,44 +8,27 @@ import java.util.NoSuchElementException;
 
 public class SimpleSet<T> implements Iterable<T> {
     private int count = 0;
-    private boolean mdcount = true;
-    private Object[] container = new Object[10];
+    private SimpleArray<T> arraySimple = new SimpleArray<>();
 
     public void add(T model) {
-        if (count == container.length) {
-            container = Arrays.copyOf(container, count * 2);
-        }
-        for (Object o : container) {
-            if (o == model) {
-                mdcount = false;
-                break;
+       if (contains(model)) {
+           arraySimple.add(model);
+       }
+    }
+
+    public boolean contains(T element) {
+        Iterator<T> iterator = arraySimple.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next() == element) {
+                return false;
             }
         }
-       if (mdcount) {
-           container[count++] = model;
-       } else {
-           mdcount = true;
-       }
+        return true;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<>() {
-            private int position = 0;
-
-            @Override
-            public boolean hasNext() {
-                return position < count;
-            }
-
-            @Override
-            public T next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-                return (T) container[position++];
-            }
-        };
+        return arraySimple.iterator();
     }
 
     public static void main(String[] args) {
