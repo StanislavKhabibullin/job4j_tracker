@@ -46,7 +46,7 @@ public class User {
                 && Objects.equals(birthday, user.birthday);
     }
 
-   /*
+  @SuppressWarnings("checkstyle:EmptyLineSeparator")
   @Override
     public int hashCode() {
         int result = 17;
@@ -55,8 +55,6 @@ public class User {
         result = 37 * result + birthday.hashCode();
         return result;
     }
-
-  */
 
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public static void main(String[] args) {
