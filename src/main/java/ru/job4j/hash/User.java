@@ -32,6 +32,15 @@ public class User {
         this.birthday = birthday;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 37 * result + (name == null ? 0 : name.hashCode());
+        result = 37 * result + children;
+        result = 37 * result + birthday.hashCode();
+        return result;
+    }
+
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public static void main(String[] args) {
         Map<User, Object> mappy = new HashMap<>();
