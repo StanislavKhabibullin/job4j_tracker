@@ -5,13 +5,14 @@ import ru.job4j.collection.SimpleArray;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SimpleSet<T> implements Iterable<T> {
     private int count = 0;
     private SimpleArray<T> arraySimple = new SimpleArray<>();
 
     public void add(T model) {
-       if (contains(model)) {
+       if (!contains(model)) {
            arraySimple.add(model);
        }
     }
@@ -19,11 +20,11 @@ public class SimpleSet<T> implements Iterable<T> {
     public boolean contains(T element) {
         Iterator<T> iterator = arraySimple.iterator();
         while (iterator.hasNext()) {
-            if (iterator.next() == element) {
-                return false;
+            if (Objects.equals(iterator.next(), element)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override
