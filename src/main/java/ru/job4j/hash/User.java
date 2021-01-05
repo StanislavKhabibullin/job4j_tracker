@@ -7,6 +7,12 @@ public class User {
     private int children;
     private Calendar birthday;
 
+    public User(String name, int children, Calendar birthday) {
+        this.name = name;
+        this.children = children;
+        this.birthday = birthday;
+    }
+
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public String getName() {
         return name;
@@ -31,7 +37,7 @@ public class User {
     public void setBirthday(Calendar birthday) {
         this.birthday = birthday;
     }
-
+/*
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -56,17 +62,16 @@ public class User {
         return result;
     }
 
+ */
+
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public static void main(String[] args) {
         Map<User, Object> mappy = new HashMap<>();
-        User user1 = new User();
-        User user2 = new User();
+        User user1 = new User("Fill", 2, new GregorianCalendar(1980, Calendar.JANUARY, 12));
+        User user2 = new User("Fill", 2, new GregorianCalendar(1980, Calendar.JANUARY, 12));
         user1.setName("Fill");
         user1.setChildren(2);
         user1.setBirthday(new GregorianCalendar(1980, Calendar.JANUARY, 12));
-        user2.setName("Fill");
-        user2.setChildren(2);
-        user2.setBirthday(new GregorianCalendar(1980, Calendar.JANUARY, 12));
         mappy.put(user1, 1);
         mappy.put(user2, 2);
         System.out.println(mappy);
