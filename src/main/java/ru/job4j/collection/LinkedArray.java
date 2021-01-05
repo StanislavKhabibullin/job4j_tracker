@@ -1,6 +1,5 @@
 package ru.job4j.collection;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -27,10 +26,10 @@ public class LinkedArray<E> implements Iterable<E> {
             nodes = new Node<>(element, null);
         } else {
             Node<E> newNode = nodes;
-            while (newNode.next != null) {
-                newNode = newNode.next;
+            while (newNode.getNext() != null) {
+                newNode = newNode.getNext();
             }
-            newNode.next = new Node<>(element, null);
+            newNode.setNext(new Node<>(element, null));
         }
         count++;
     }
@@ -39,9 +38,9 @@ public class LinkedArray<E> implements Iterable<E> {
     public E get(int index) {
         Objects.checkIndex(index, count);
         int i = 0;
-        while (nodes.next != null) {
+        while (nodes.getNext() != null) {
             if (i == index) {
-                return nodes.item;
+                return nodes.getItem();
             }
             i++;
         }
@@ -64,8 +63,8 @@ public class LinkedArray<E> implements Iterable<E> {
                     throw new NoSuchElementException();
                 }
                 position++;
-                E value = currentTest.item;
-                currentTest = currentTest.next;
+                E value = currentTest.getItem();
+                currentTest = currentTest.getNext();
                 return value;
             }
         };
