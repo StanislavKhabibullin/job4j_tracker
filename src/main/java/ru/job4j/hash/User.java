@@ -37,7 +37,7 @@ public class User {
     public void setBirthday(Calendar birthday) {
         this.birthday = birthday;
     }
-/*
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -52,9 +52,7 @@ public class User {
                 && Objects.equals(birthday, user.birthday);
     }
 
- */
-
-  @SuppressWarnings("checkstyle:EqualsHashCode")
+  @SuppressWarnings({"checkstyle:EqualsHashCode", "checkstyle:EmptyLineSeparator"})
   @Override
     public int hashCode() {
         int result = 17;
