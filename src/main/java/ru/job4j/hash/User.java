@@ -52,7 +52,9 @@ public class User {
                 && Objects.equals(birthday, user.birthday);
     }
 
-  @SuppressWarnings("checkstyle:EmptyLineSeparator")
+ */
+
+  @SuppressWarnings("checkstyle:EqualsHashCode")
   @Override
     public int hashCode() {
         int result = 17;
@@ -61,8 +63,6 @@ public class User {
         result = 37 * result + birthday.hashCode();
         return result;
     }
-
- */
 
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public static void main(String[] args) {
@@ -75,5 +75,8 @@ public class User {
         mappy.put(user1, 1);
         mappy.put(user2, 2);
         System.out.println(mappy);
+        System.out.println(user1.hashCode());
+        System.out.println(user1.hashCode());
+        System.out.println(user2.hashCode());
     }
 }
