@@ -62,6 +62,16 @@ public class User {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "User{"
+                + "name='"
+                + name + '\''
+                + ", children=" + children
+                + ", birthday=" + birthday
+                + '}';
+    }
+
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public static void main(String[] args) {
         Map<User, Object> mappy = new HashMap<>();
