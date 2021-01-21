@@ -5,25 +5,21 @@ import java.util.function.Consumer;
 
 public class HashMas<K, V> implements Book<K, V> {
     private Node<K, V>[] hashtable;
-    int size;
-    float treshHold;
+    private int size;
+    private int treshOld;
+    private float loadFactor;
 
     public HashMas() {
         this.hashtable = new Node[16];
-        this.treshHold = (float) (hashtable.length * 0.75);
+        loadFactor = (float) (hashtable.length * 0.75);
+        this.treshOld = (int) (loadFactor);
     }
 
     @Override
     public boolean insert(K key, V value) {
-        if (size + 1 >= treshHold) {
-            treshHold = treshHold * 2;
-            Node[] rsl = hashtable;
-            this.hashtable = new Node[hashtable.length * 2];
-            for (Node<K, V> node : rsl) {
-             if (node != null) {
-                 insert(node.getKey(), node.getValue());
-             }
-            }
+        if (size + 1 >= treshOld) {
+            doubleMapa();
+
         }
         Node<K, V> newNode = new Node<>(key, value);
         int index = hash(newNode.getKey());
@@ -38,10 +34,23 @@ public class HashMas<K, V> implements Book<K, V> {
         return false;
     }
 
+    public void doubleMapa() {
+        treshOld = treshOld * 2;
+        Node[] rsl = hashtable;
+        this.hashtable = new Node[hashtable.length * 2];
+        loadFactor = (float) (hashtable.length * 0.75);
+        size = 0;
+        for (Node<K, V> node : rsl) {
+            if (node != null) {
+                insert(node.getKey(), node.getValue());
+            }
+        }
+    }
+
     @Override
     public boolean delete(K key) {
         int index = hash(key);
-        if (hashtable[index] != null) {
+        if (!hashtable[index].equals(null)) {
             hashtable[index] = null;
             return true;
         }
