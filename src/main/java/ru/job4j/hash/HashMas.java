@@ -50,8 +50,9 @@ public class HashMas<K, V> implements Book<K, V> {
     @Override
     public boolean delete(K key) {
         int index = hash(key);
-        if (!hashtable[index].equals(null)) {
+        if (hashtable[index] != null && hashtable[index].getKey().equals(key)) {
             hashtable[index] = null;
+            size--;
             return true;
         }
         return false;
@@ -60,7 +61,11 @@ public class HashMas<K, V> implements Book<K, V> {
     @Override
     public V get(K key) {
         int index = hash(key);
-        return hashtable[index].getNodes().get(0).getValue();
+        if (hashtable[index] != null && hashtable[index].getKey().equals(key)) {
+            return hashtable[index].getNodes().get(0).getValue();
+        }
+        System.out.println("Wrong key");
+        return null;
     }
 
     @Override
