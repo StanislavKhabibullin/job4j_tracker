@@ -7,12 +7,11 @@ public class HashMas<K, V> implements Book<K, V> {
     private Node<K, V>[] hashtable;
     private int size;
     private int treshOld;
-    private float loadFactor;
+    private final static float LOAD_FACTOR = (float) 0.75;
 
     public HashMas() {
         this.hashtable = new Node[16];
-        loadFactor = (float) (hashtable.length * 0.75);
-        this.treshOld = (int) (loadFactor);
+        this.treshOld = (int) (hashtable.length * LOAD_FACTOR);
     }
 
     @Override
@@ -38,7 +37,6 @@ public class HashMas<K, V> implements Book<K, V> {
         treshOld = treshOld * 2;
         Node[] rsl = hashtable;
         this.hashtable = new Node[hashtable.length * 2];
-        loadFactor = (float) (hashtable.length * 0.75);
         size = 0;
         for (Node<K, V> node : rsl) {
             if (node != null) {
