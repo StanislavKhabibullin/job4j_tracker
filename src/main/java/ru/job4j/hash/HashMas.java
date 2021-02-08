@@ -34,9 +34,9 @@ public class HashMas<K, V> implements Book<K, V> {
     }
 
     public void doubleMapa() {
-        treshOld = treshOld * 2;
         Node[] rsl = hashtable;
         this.hashtable = new Node[hashtable.length * 2];
+        treshOld = (int) (hashtable.length * LOAD_FACTOR);
         size = 0;
         for (Node<K, V> node : rsl) {
             if (node != null) {
@@ -74,7 +74,7 @@ public class HashMas<K, V> implements Book<K, V> {
     @Override
     public Iterator<V> iterator() {
         return new Iterator<V>() {
-            int countArray = 0;
+           private int countArray = 0;
 
             @Override
             public boolean hasNext() {
@@ -86,6 +86,9 @@ public class HashMas<K, V> implements Book<K, V> {
 
             @Override
             public V next() {
+                while (hashtable[countArray].getNodes().equals(null)) {
+                    countArray++;
+                }
                 return hashtable[countArray++].getNodes().iterator().next().getValue();
             }
         };
