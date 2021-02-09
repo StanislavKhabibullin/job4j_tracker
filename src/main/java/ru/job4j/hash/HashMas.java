@@ -78,16 +78,16 @@ public class HashMas<K, V> implements Book<K, V> {
 
             @Override
             public boolean hasNext() {
-                if (countArray == size) {
-                    return false;
-                }
-                return hashtable[countArray].getNodes().iterator().hasNext();
+                return countArray < size;
             }
 
             @Override
             public V next() {
                 while (hashtable[countArray].getNodes().equals(null)) {
                     countArray++;
+                    if (countArray == size) {
+                        throw new NoSuchElementException();
+                    }
                 }
                 return hashtable[countArray++].getNodes().iterator().next().getValue();
             }
