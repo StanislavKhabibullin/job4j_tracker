@@ -83,6 +83,9 @@ public class HashMas<K, V> implements Book<K, V> {
 
             @Override
             public V next() {
+                if (countArray >= size) {
+                    throw new NoSuchElementException();
+                }
                 while (hashtable[countArray].getNodes().equals(null)) {
                     countArray++;
                     if (countArray == size) {
