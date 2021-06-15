@@ -1,6 +1,7 @@
 package ru.job4j.hash;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 
 public class User {
     private String name;
@@ -38,7 +39,7 @@ public class User {
         this.birthday = birthday;
     }
 
-    @Override
+  /*  @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -51,6 +52,8 @@ public class User {
                 && Objects.equals(name, user.name)
                 && Objects.equals(birthday, user.birthday);
     }
+
+   */
 
   @SuppressWarnings({"checkstyle:EqualsHashCode", "checkstyle:EmptyLineSeparator"})
   @Override
@@ -74,16 +77,18 @@ public class User {
 
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     public static void main(String[] args) {
-        Map<User, Object> mappy = new HashMap<>();
+        Map<User, Object> mappy = new HashMap<>(2);
         User user1 = new User("Fill", 2, new GregorianCalendar(1980, Calendar.JANUARY, 12));
         User user2 = new User("Fill", 2, new GregorianCalendar(1980, Calendar.JANUARY, 12));
-        user1.setName("Fill");
-        user1.setChildren(2);
-        user1.setBirthday(new GregorianCalendar(1980, Calendar.JANUARY, 12));
+        User user3 = new User("Fill", 2, new GregorianCalendar(1980, Calendar.JANUARY, 12));
         mappy.put(user1, 1);
         mappy.put(user2, 2);
-        System.out.println(mappy);
-        System.out.println(user1.hashCode());
+        mappy.put(user2, 1);
+        var collect = user1.hashCode();
+        System.out.println("collect = " + collect);
+        mappy.entrySet().stream().forEach(t -> System.out.println("key = " + t.getKey() + "value = " + t.getValue()));
+
+
         System.out.println(user1.hashCode());
         System.out.println(user2.hashCode());
     }
