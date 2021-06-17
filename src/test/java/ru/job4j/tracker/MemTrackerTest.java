@@ -1,6 +1,5 @@
 package ru.job4j.tracker;
 
-import org.hamcrest.Matcher;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -9,20 +8,20 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-public class TrackerTest {
+public class MemTrackerTest {
 
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
-        Tracker tracker = new Tracker();
+        MemTracker memTracker = new MemTracker();
         Item item = new Item(0, "test1");
-        tracker.add(item);
-        Item result = tracker.findById(item.getId());
+        memTracker.add(item);
+        Item result = memTracker.findById(item.getId());
         assertThat(result.getName(), is(item.getName()));
     }
 
     @Test
     public void whenReplace() {
-        Tracker test = new Tracker();
+        MemTracker test = new MemTracker();
         Item bug = new Item("New Item");
         test.add(bug);
         Item expected = new Item("Replace Item");
@@ -36,22 +35,22 @@ public class TrackerTest {
 
     @Test
     public void whenDelete() {
-        Tracker tracker = new Tracker();
+        MemTracker memTracker = new MemTracker();
         Item bug = new Item("New Item");
-        tracker.add(bug);
+        memTracker.add(bug);
         String[] answers = {
                 String.valueOf(bug.getId())
         };
-        StartUi.deleteItem(new StubInput(answers), tracker);
+        StartUi.deleteItem(new StubInput(answers), memTracker);
         Item expected = null;
-        assertThat(tracker.findById(bug.getId()),
+        assertThat(memTracker.findById(bug.getId()),
                 is(expected)
                 );
     }
 
     @Test
     public void whenSortUp() {
-        Tracker test = new Tracker();
+        MemTracker test = new MemTracker();
         Item first = new Item("first");
         Item second = new Item("second");
         Item third = new Item("fird");
@@ -59,7 +58,7 @@ public class TrackerTest {
         test.add(second);
         test.add(third);
         Collections.sort(test.findAll(), new TrackerSortById());
-        Tracker expected = new Tracker();
+        MemTracker expected = new MemTracker();
         expected.add(third);
         expected.add(first);
         expected.add(second);
@@ -70,7 +69,7 @@ public class TrackerTest {
 
     @Test
     public void whenSortDown() {
-        Tracker test = new Tracker();
+        MemTracker test = new MemTracker();
         Item first = new Item("first");
         Item second = new Item("second");
         Item third = new Item("fird");
@@ -78,7 +77,7 @@ public class TrackerTest {
         test.add(second);
         test.add(third);
         Collections.sort(test.findAll(), new TrackerSortByIdDown());
-        Tracker expected = new Tracker();
+        MemTracker expected = new MemTracker();
         expected.add(second);
         expected.add(first);
         expected.add(third);

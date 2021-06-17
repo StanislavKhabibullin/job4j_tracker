@@ -15,13 +15,13 @@ public class FindByName implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store memTracker) {
         String inp = input.askStr("Input the name of request you want to find");
-        List<Item> temp = tracker.findByName(inp);
+        List<Item> temp = memTracker.findByName(inp);
         if (temp.size() > 0) {
             for (int i = 0; i < temp.size(); i++) {
                 out.println("id: " + temp.get(i).getId()
-                        + " name: " + temp.get(i).getId());
+                        + " name: " + temp.get(i).getName());
             }
         } else {
             out.println("No such requests");

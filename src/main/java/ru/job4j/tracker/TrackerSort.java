@@ -4,7 +4,7 @@ import java.util.Collections;
 
 public class TrackerSort {
     public static void main(String[] args) {
-        Tracker test = new Tracker();
+        MemTracker test = new MemTracker();
         Item first = new Item("first");
         Item second = new Item("second");
         Item third = new Item("fird");

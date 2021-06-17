@@ -13,9 +13,9 @@ public class DeleteItem implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store memTracker) {
         int promt = input.askInt("Input id elements you want to delete: ");
-        if (tracker.delete(promt)) {
+        if (memTracker.delete(promt)) {
             out.println("Delete succes");
         } else {
             out.println("Error no such id");

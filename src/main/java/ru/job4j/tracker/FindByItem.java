@@ -13,9 +13,9 @@ public class FindByItem implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store memTracker) {
         int promt = input.askInt("Input id elements you want to find: ");
-        Item temp = tracker.findById(promt);
+        Item temp = memTracker.findById(promt);
         if (temp != null) {
             out.println("id: " + temp.getId()
                     + " name: " + temp.getName());

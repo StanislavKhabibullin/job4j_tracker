@@ -6,13 +6,15 @@ public class ByBy implements UserAction {
     public ByBy(Output out) {
         this.out = out;
     }
+
+    @SuppressWarnings("checkstyle:EmptyLineSeparator")
     @Override
     public String name() {
         return "Exit";
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store memTracker) {
         out.println("See you soon!");
         return false;
     }
