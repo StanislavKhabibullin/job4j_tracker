@@ -27,10 +27,10 @@ public class SqlTracker implements Store {
         try (Statement statement = cn.createStatement()) {
             String sql = String.format(
                     "Create table if not exists "
-                            + "tiksi"
+                            + "items"
                             + "(id serial primary key, name varchar(50));");
             var ast = statement.execute(sql);
-            System.out.println(getTableScheme(cn, "tiksi"));
+            System.out.println(getTableScheme(cn, "items"));
         }
     }
 
@@ -45,7 +45,7 @@ public class SqlTracker implements Store {
     public Item add(Item item) throws SQLException {
 
         try (PreparedStatement statement =
-                     cn.prepareStatement("INSERT INTO tiksi(name) VALUES(?);")) {
+                     cn.prepareStatement("INSERT INTO items(name) VALUES(?);")) {
             statement.setString(1, item.getName());
             statement.execute();
 
@@ -54,11 +54,12 @@ public class SqlTracker implements Store {
 
     }
 
+    @SuppressWarnings("checkstyle:EmptyLineSeparator")
     @Override
     public boolean replace(int id, Item item) throws SQLException {
         boolean result = false;
         try (PreparedStatement statement =
-                     cn.prepareStatement("update tiksi set name = ? where id = ?")) {
+                     cn.prepareStatement("update items set name = ? where id = ?")) {
             statement.setString(1, item.getName());
             statement.setInt(2, id);
             result = statement.executeUpdate() > 0;
@@ -71,7 +72,7 @@ public class SqlTracker implements Store {
     public boolean delete(int id) {
         boolean result = false;
         try (PreparedStatement statement =
-                     cn.prepareStatement("delete from tiksi where id = ?")) {
+                     cn.prepareStatement("delete from items where id = ?")) {
             statement.setInt(1, id);
             result = statement.executeUpdate() > 0;
         } catch (Exception e) {
@@ -83,15 +84,14 @@ public class SqlTracker implements Store {
     @Override
     public List<Item> findByName(String key) {
         List<Item> items = new ArrayList<>();
-        try (PreparedStatement statement = cn.prepareStatement("select * from tiksi")) {
+        try (PreparedStatement statement = cn.prepareStatement("select * from items WHERE NAME = ?")) {
+            statement.setString(1, key);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    if (resultSet.getString("name").equals(key)) {
-                        items.add(new Item(
+                         items.add(new Item(
                                 resultSet.getInt("id"),
                                 resultSet.getString("name")
                         ));
-                    }
                 }
             }
         } catch (Exception e) {
@@ -103,15 +103,16 @@ public class SqlTracker implements Store {
     @Override
     public Item findById(int id) {
         Item items = new Item();
-        try (PreparedStatement statement = cn.prepareStatement("select * from tiksi")) {
+        try (PreparedStatement statement = cn.prepareStatement("select * from items WHERE id = ?")) {
+            statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    if (resultSet.getInt("id") == id) {
+                if (resultSet.next()) {
                         items = new Item(
                                 resultSet.getInt("id"),
                                 resultSet.getString("name")
                         );
-                    }
+                } else {
+                    return null;
                 }
             }
         } catch (Exception e) {
@@ -123,7 +124,7 @@ public class SqlTracker implements Store {
     @Override
     public List<Item> findAll() {
         List<Item> items = new ArrayList<>();
-        try (PreparedStatement statement = cn.prepareStatement("select * from tiksi")) {
+        try (PreparedStatement statement = cn.prepareStatement("select * from items")) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     items.add(new Item(
