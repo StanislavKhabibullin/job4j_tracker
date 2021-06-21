@@ -1,7 +1,6 @@
 package ru.job4j.hash;
 
 import java.util.*;
-import java.util.function.BiConsumer;
 
 public class User {
     private String name;
@@ -39,7 +38,7 @@ public class User {
         this.birthday = birthday;
     }
 
-  /*  @Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -53,9 +52,7 @@ public class User {
                 && Objects.equals(birthday, user.birthday);
     }
 
-   */
-
-  @SuppressWarnings({"checkstyle:EqualsHashCode", "checkstyle:EmptyLineSeparator"})
+   @SuppressWarnings({"checkstyle:EqualsHashCode", "checkstyle:EmptyLineSeparator"})
   @Override
     public int hashCode() {
         int result = 17;
@@ -87,8 +84,6 @@ public class User {
         var collect = user1.hashCode();
         System.out.println("collect = " + collect);
         mappy.entrySet().stream().forEach(t -> System.out.println("key = " + t.getKey() + "value = " + t.getValue()));
-
-
         System.out.println(user1.hashCode());
         System.out.println(user2.hashCode());
     }

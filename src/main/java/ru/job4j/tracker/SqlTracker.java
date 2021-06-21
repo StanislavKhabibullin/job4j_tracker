@@ -11,6 +11,13 @@ import java.util.Properties;
 public class SqlTracker implements Store {
     private Connection cn;
 
+    public SqlTracker(Connection cn) {
+        this.cn = cn;
+    }
+
+    public SqlTracker() {
+    }
+
     @Override
     public void init() throws IOException, ClassNotFoundException, SQLException {
         try (InputStream in = SqlTracker.class.
