@@ -31,14 +31,16 @@ public class SqlTracker implements Store {
                     config.getProperty("password")
             );
         }
-        try (Statement statement = cn.createStatement()) {
+      /*  try (Statement statement = cn.createStatement()) {
             String sql = String.format(
                     "Create table if not exists "
-                            + "items7"
+                            + "items"
                             + "(id serial primary key, name varchar(50));");
             var ast = statement.execute(sql);
             System.out.println(getTableScheme(cn, "items"));
         }
+
+       */
     }
 
     @Override
@@ -52,7 +54,7 @@ public class SqlTracker implements Store {
     public Item add(Item item) throws SQLException {
 
         try (PreparedStatement statement =
-                     cn.prepareStatement("INSERT INTO items7(name) VALUES(?);", Statement.RETURN_GENERATED_KEYS)) {
+                     cn.prepareStatement("INSERT INTO items(name) VALUES(?);", Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, item.getName());
             statement.execute();
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
@@ -70,7 +72,7 @@ public class SqlTracker implements Store {
     public boolean replace(int id, Item item) throws SQLException {
         boolean result = false;
         try (PreparedStatement statement =
-                     cn.prepareStatement("update items7 set name = ? where id = ?")) {
+                     cn.prepareStatement("update items set name = ? where id = ?")) {
             statement.setString(1, item.getName());
             statement.setInt(2, id);
             result = statement.executeUpdate() > 0;
@@ -83,7 +85,7 @@ public class SqlTracker implements Store {
     public boolean delete(int id) {
         boolean result = false;
         try (PreparedStatement statement =
-                     cn.prepareStatement("delete from items7 where id = ?")) {
+                     cn.prepareStatement("delete from items where id = ?")) {
             statement.setInt(1, id);
             result = statement.executeUpdate() > 0;
         } catch (Exception e) {
@@ -95,7 +97,7 @@ public class SqlTracker implements Store {
     @Override
     public List<Item> findByName(String key) {
         List<Item> items = new ArrayList<>();
-        try (PreparedStatement statement = cn.prepareStatement("select * from items7 WHERE NAME = ?")) {
+        try (PreparedStatement statement = cn.prepareStatement("select * from items WHERE NAME = ?")) {
             statement.setString(1, key);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
@@ -114,7 +116,7 @@ public class SqlTracker implements Store {
     @Override
     public Item findById(int id) {
         Item items = null;
-        try (PreparedStatement statement = cn.prepareStatement("select * from items7 WHERE id = ?")) {
+        try (PreparedStatement statement = cn.prepareStatement("select * from items WHERE id = ?")) {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
@@ -133,7 +135,7 @@ public class SqlTracker implements Store {
     @Override
     public List<Item> findAll() {
         List<Item> items = new ArrayList<>();
-        try (PreparedStatement statement = cn.prepareStatement("select * from items7")) {
+        try (PreparedStatement statement = cn.prepareStatement("select * from items")) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     items.add(new Item(
