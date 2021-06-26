@@ -55,25 +55,59 @@ public class SqlTrackerTest {
     }
 
     @Test
-    public void testEditItem() throws SQLException {
-        SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()));
-        Item masik = tracker.add(new Item("name17"));
-        tracker.replace(masik.getId(), new Item("name27"));
+    public void testEditItem() {
+        SqlTracker tracker = null;
+        try {
+            tracker = new SqlTracker(ConnectionRollback.create(this.init()));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        Item masik = null;
+        try {
+            masik = tracker.add(new Item("name17"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        try {
+            tracker.replace(masik.getId(), new Item("name27"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         assertThat(tracker.findById(masik.getId()).getName(), is("name27"));
     }
 
     @Test
-    public void testDeleteItemO() throws SQLException {
-        SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()));
-        tracker.delete(8);
-        assertThat(tracker.findById(8),
+    public void testDeleteItemO() {
+        SqlTracker tracker = null;
+        try {
+            tracker = new SqlTracker(ConnectionRollback.create(this.init()));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        Item item = new Item("item");
+        try {
+            item = tracker.add(item);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        tracker.delete(item.getId());
+        assertThat(tracker.findById(item.getId()),
                 is(nullValue));
     }
 
     @Test
-    public void testFindById() throws SQLException {
-        SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()));
-        tracker.add(new Item("testRes"));
+    public void testFindById() {
+        SqlTracker tracker = null;
+        try {
+            tracker = new SqlTracker(ConnectionRollback.create(this.init()));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        try {
+            tracker.add(new Item("testRes"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         List<Item> mas = tracker.findByName("testRes");
         Item result = mas.get(0);
         assertThat(tracker.findById(result.getId()).getName(),
@@ -81,22 +115,46 @@ public class SqlTrackerTest {
     }
 
     @Test
-    public void testFindByName() throws SQLException {
-        SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()));
+    public void testFindByName() {
+        SqlTracker tracker = null;
+        try {
+            tracker = new SqlTracker(ConnectionRollback.create(this.init()));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
-        Item masik = tracker.add(new Item("testRes"));
+        Item masik = null;
+        try {
+            masik = tracker.add(new Item("testRes"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         assertThat(tracker.findByName("testRes").get(0).getId(),
                 is(masik.getId()));
     }
 
-    @SuppressWarnings("checkstyle:OperatorWrap")
     @Test
-    public void testFindAll() throws SQLException {
-        SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()));
+    public void testFindAll() {
+        SqlTracker tracker = null;
+        try {
+            tracker = new SqlTracker(ConnectionRollback.create(this.init()));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
-        Item masik = tracker.add(new Item("testRes"));
-        Item masik1 = tracker.add(new Item("testRes1"));
+        Item masik = null;
+        try {
+            masik = tracker.add(new Item("testRes"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        Item masik1 = null;
+        try {
+            masik1 = tracker.add(new Item("testRes1"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         List<Item> result = new ArrayList<>();
         result.add(masik);
         result.add(masik1);
